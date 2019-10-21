@@ -1,0 +1,11 @@
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const GET_ERRORS = "GET_ERRORS";
+export const SET_CLIENTS = "SET_CLIENTS";
+export const SET_ALL_TASKS = "SET_ALL_TASKS";
+export const SET_USERS = "SET_USERS";
+export const CLEAR_DATA = "CLEAR_DATA";
+export const SET_USER_TASKS = "SET_USER_TASKS";
+export const SET_ASSIGNED_TASKS = "SET_ASSIGNED_TASKS";
+export const SET_SUPERVISING_TASKS = "SET_SUPERVISING_TASKS";
+export const SET_COMPLETED_TASKS = "SET_COMPLETED_TASKS";
