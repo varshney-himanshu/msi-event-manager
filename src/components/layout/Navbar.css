@@ -1,0 +1,42 @@
+.nav-auth {
+  display: none;
+}
+
+.navbar {
+  background: white;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+
+.nav-link {
+  color: darkslategray;
+  padding: 0;
+}
+
+.navbar-brand {
+  color: black;
+}
+
+.navbar-toggler {
+  border: 2px solid black;
+}
+.fa-bars {
+  color: black;
+  font-size: 30px;
+}
+button {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+button.login {
+  background: darkslategray;
+  color: white;
+}
+
+button.register {
+  border: 1px solid darkslategray;
+  color: darkslategray;
+}

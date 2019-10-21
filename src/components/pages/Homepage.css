@@ -1,0 +1,7 @@
+.carousel img {
+  width: 90%;
+  margin: auto;
+}
+.carousel-control-prev-icon {
+  color: black !important;
+}

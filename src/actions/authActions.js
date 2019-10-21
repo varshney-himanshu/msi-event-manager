@@ -16,24 +16,27 @@ var config = {
   }
 };
 
-//register admin
-
-// export const registerAdmin = (userData,history) => dispatch =>{
-//     axios.post('/api/admins/register', userData,config)
-//     .then(res => history.push('/admin/dashboard'))
-//     .catch(err =>
-//       dispatch({
-//         type: GET_ERRORS,
-//         payload: err.response.data
-//       })
-//     );
-// }
+export const registerUser = (userData, history) => dispatch => {
+  axios
+    .post(
+      "https://api-msi-event-manager.now.sh/user/register",
+      userData,
+      config
+    )
+    .then(res => history.push("/login"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 
 //Login - get login token
 
 export const loginUser = (userData, history) => dispatch => {
   axios
-    .post("https://api-kyra.now.sh/user/login", userData, config)
+    .post("https://api-msi-event-manager.now.sh/user/login", userData, config)
     .then(res => {
       const { token } = res.data;
       //saving token in local Storage
