@@ -23,7 +23,13 @@ export const registerUser = (userData, history) => dispatch => {
       userData,
       config
     )
-    .then(res => history.push("/login"))
+    .then(res => {
+      dispatch({
+        type: CLEAR_ERRORS,
+        payload: {}
+      });
+      history.push("/login");
+    })
     .catch(err => {
       if (err.response) {
         dispatch({

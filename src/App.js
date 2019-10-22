@@ -15,6 +15,7 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import Navbar from "./components/layout/Navbar";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
+import Events from "./components/pages/Events";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -42,6 +43,7 @@ class App extends Component {
           <Router>
             <Navbar />
             <Route exact path="/" component={Homepage} />
+            <Route exact path="/events" component={Events} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
           </Router>

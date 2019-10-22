@@ -98,6 +98,11 @@ class Navbar extends Component {
                   Events
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/contact">
+                  Contact
+                </Link>
+              </li>
             </ul>
             <ul className="navbar-nav ml-auto ">
               {!this.state.auth.isAuthenticated
