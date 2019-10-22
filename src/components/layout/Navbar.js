@@ -10,7 +10,11 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      auth: {}
+      auth: {
+        user: {
+          name: ""
+        }
+      }
     };
   }
 
@@ -43,7 +47,7 @@ class Navbar extends Component {
     </>
   );
 
-  not_logged_in = (
+  not_logged_in = state => (
     <>
       <div class="btn-group dropleft">
         <button
@@ -54,7 +58,7 @@ class Navbar extends Component {
           aria-expanded="false"
         >
           {" "}
-          {this.props.auth.user.name}
+          {state.auth.user.name}
         </button>
         <div class="dropdown-menu">
           <Link class="dropdown-item" to="/dashboard">
@@ -102,7 +106,7 @@ class Navbar extends Component {
             <ul className="navbar-nav ml-auto ">
               {!this.state.auth.isAuthenticated
                 ? this.logged_in
-                : this.not_logged_in}
+                : this.not_logged_in(this.state)}
             </ul>
           </div>
         </nav>
