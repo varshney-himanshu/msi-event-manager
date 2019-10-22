@@ -24,12 +24,16 @@ export const registerUser = (userData, history) => dispatch => {
       config
     )
     .then(res => history.push("/login"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+    .catch(err => {
+      if (err.response) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
+      } else {
+        console.log(err);
+      }
+    });
 };
 
 //Login - get login token
@@ -50,7 +54,7 @@ export const loginUser = (userData, history) => dispatch => {
         type: CLEAR_ERRORS,
         payload: {}
       });
-      history.push("/dashboard");
+      history.push("/");
     })
     .catch(err => {
       if (err.response) {

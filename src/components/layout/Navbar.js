@@ -10,11 +10,7 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      auth: {
-        user: {
-          name: ""
-        }
-      }
+      auth: {}
     };
   }
 
@@ -40,7 +36,7 @@ class Navbar extends Component {
         </Link>
       </li>
       <li className="nav-item">
-        <Link to="#" className="nav-link">
+        <Link to="/register" className="nav-link">
           <button className="register">Register</button>
         </Link>
       </li>

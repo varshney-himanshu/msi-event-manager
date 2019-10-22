@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import logo from "../../kyralogodark.png";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import { withRouter } from "react-router";
@@ -11,8 +10,17 @@ class Login extends Component {
     super();
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      errors: {}
     };
+  }
+
+  static getDerivedStateFromProps(props) {
+    if (props.err) {
+      return {
+        errors: props.err
+      };
+    }
   }
 
   componentDidMount() {
@@ -56,7 +64,8 @@ class Login extends Component {
                 onChange={this.onChange}
                 required
               />
-              <br></br>
+              {this.state.errors.email && this.state.errors.email}
+              <br />
               <input
                 type="password"
                 name="password"
@@ -65,7 +74,8 @@ class Login extends Component {
                 onChange={this.onChange}
                 required
               />
-              <br></br>
+              {this.state.errors.password && this.state.errors.password}
+              <br />
               <button type="submit" value="Login">
                 Login
               </button>
@@ -78,7 +88,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  err: state.errors
 });
 
 export default connect(
