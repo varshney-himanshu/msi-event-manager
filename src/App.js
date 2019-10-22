@@ -13,6 +13,7 @@ import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import Navbar from "./components/layout/Navbar";
+import Login from "./components/pages/Login";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -37,9 +38,10 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <Navbar />
           <Router>
+            <Navbar />
             <Route exact path="/" component={Homepage} />
+            <Route exact path="/login" component={Login} />
           </Router>
         </div>
       </Provider>

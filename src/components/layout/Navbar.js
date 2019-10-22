@@ -1,15 +1,80 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { logoutUser } from "../../actions/authActions";
+import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Navbar.css";
-export default class Navbar extends Component {
+
+class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      auth: {}
+    };
+  }
+
+  static getDerivedStateFromProps(props) {
+    if (props.auth) {
+      return {
+        auth: props.auth
+      };
+    }
+  }
+
+  onClickLogout = () => {
+    if (window.confirm("Are you sure? Please confirm")) {
+      this.props.logoutUser();
+    }
+  };
+
+  logged_in = (
+    <>
+      <li className="nav-item">
+        <Link to="/login" className="nav-link">
+          <button className="login">Login</button>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="#" className="nav-link">
+          <button className="register">Register</button>
+        </Link>
+      </li>
+    </>
+  );
+
+  not_logged_in = (
+    <>
+      <div class="btn-group dropleft">
+        <button
+          type="button"
+          class="btn btn-secondary dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {" "}
+          {this.props.auth.user.name}
+        </button>
+        <div class="dropdown-menu">
+          <Link class="dropdown-item" to="/dashboard">
+            Dashboard
+          </Link>
+          <button onClick={this.onClickLogout} class="dropdown-item">
+            Logout
+          </button>
+        </div>
+      </div>
+    </>
+  );
+
   render() {
     return (
       <div>
         <nav className="navbar navbar-expand-lg">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             <strong>MSI Events</strong>
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -24,27 +89,20 @@ export default class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/">
                   Home <span className="sr-only">(current)</span>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/events">
                   Events
-                </a>
+                </Link>
               </li>
             </ul>
             <ul className="navbar-nav ml-auto ">
-              <li className="nav-item">
-                <a href="#" className="nav-link">
-                  <button className="login">Login</button>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#" className="nav-link">
-                  <button className="register">Register</button>
-                </a>
-              </li>
+              {!this.state.auth.isAuthenticated
+                ? this.logged_in
+                : this.not_logged_in}
             </ul>
           </div>
         </nav>
@@ -52,3 +110,12 @@ export default class Navbar extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navbar);

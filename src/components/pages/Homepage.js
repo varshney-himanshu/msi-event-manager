@@ -5,7 +5,6 @@ class Homepage extends Component {
   render() {
     return (
       <div>
-        Homepage
         <div
           id="carouselExampleControls"
           class="carousel slide"
@@ -40,7 +39,7 @@ class Homepage extends Component {
             role="button"
             data-slide="prev"
           >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
             <span class="sr-only">Previous</span>
           </a>
           <a
@@ -49,7 +48,7 @@ class Homepage extends Component {
             role="button"
             data-slide="next"
           >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
             <span class="sr-only">Next</span>
           </a>
         </div>

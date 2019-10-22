@@ -24,7 +24,8 @@
   color: black;
   font-size: 30px;
 }
-button {
+button.login,
+button.register {
   background: none;
   border: none;
   padding: 5px 10px;
@@ -39,4 +40,7 @@ button.login {
 button.register {
   border: 1px solid darkslategray;
   color: darkslategray;
+}
+
+.dropdown-menu {
 }

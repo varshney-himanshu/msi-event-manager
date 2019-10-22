@@ -1,7 +1,16 @@
+.carousel {
+  margin-top: 3vh;
+}
 .carousel img {
-  width: 90%;
+  width: 80vw;
   margin: auto;
+  border-radius: 5px;
 }
 .carousel-control-prev-icon {
   color: black !important;
+}
+/*  */
+
+.fa {
+  color: black;
 }
