@@ -1,9 +1,11 @@
 .timer {
   margin-top: 10px;
+  width: 200px;
 }
 .timer span {
   border: 1px solid black;
   padding: 2px 4px;
   font-weight: bold;
-  background: rgb(203, 255, 219);
+  background: white;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
 }

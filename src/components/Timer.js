@@ -41,18 +41,22 @@ class Timer extends React.Component {
         <span>
           {days < 10 && "0"}
           {days}
+          <small className="time-info">D</small>
         </span>{" "}
         <span>
           {hours < 10 && "0"}
           {hours}
+          <small className="time-info">H</small>
         </span>{" "}
         <span>
           {minutes < 10 && "0"}
           {minutes}
+          <small className="time-info">M</small>
         </span>{" "}
         <span>
           {seconds < 10 && "0"}
           {seconds}
+          <small className="time-info">S</small>
         </span>
       </div>
     );

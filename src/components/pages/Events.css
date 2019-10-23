@@ -30,3 +30,19 @@
 .event-card p {
   margin: 0;
 }
+
+.event-card .footer {
+  display: flex;
+}
+
+.event-register {
+  background: none;
+  border: 1px solid black;
+  margin-left: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .event-card {
+    width: 90vw;
+  }
+}

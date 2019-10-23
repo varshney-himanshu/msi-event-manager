@@ -53,9 +53,7 @@ class Homepage extends Component {
           </a>
         </div>
         <div className="row"></div>
-        <div className="col-md-9">
-          <h1>hello</h1>
-        </div>
+        <div className="col-md-9"></div>
         <div className="col-md-3"></div>
       </div>
     );
