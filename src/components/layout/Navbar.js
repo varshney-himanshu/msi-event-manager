@@ -28,7 +28,7 @@ class Navbar extends Component {
     }
   };
 
-  logged_in = (
+  not_logged_in = (
     <>
       <li className="nav-item">
         <Link to="/login" className="nav-link">
@@ -43,7 +43,7 @@ class Navbar extends Component {
     </>
   );
 
-  not_logged_in = state => (
+  logged_in = state => (
     <>
       <div class="btn-group dropleft">
         <button
@@ -57,9 +57,15 @@ class Navbar extends Component {
           {state.auth.user.name}
         </button>
         <div class="dropdown-menu">
-          <Link class="dropdown-item" to="/dashboard">
-            Dashboard
-          </Link>
+          {state.auth.user.role === "ADMIN" ? (
+            <Link class="dropdown-item" to="/dashboard">
+              Dashboard
+            </Link>
+          ) : (
+            <Link class="dropdown-item" to="/user/profile">
+              Profile
+            </Link>
+          )}
           <button onClick={this.onClickLogout} class="dropdown-item">
             Logout
           </button>
@@ -105,9 +111,9 @@ class Navbar extends Component {
               </li>
             </ul>
             <ul className="navbar-nav ml-auto ">
-              {!this.state.auth.isAuthenticated
-                ? this.logged_in
-                : this.not_logged_in(this.state)}
+              {this.state.auth.isAuthenticated
+                ? this.logged_in(this.state)
+                : this.not_logged_in}
             </ul>
           </div>
         </nav>

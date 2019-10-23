@@ -60,7 +60,11 @@ export const loginUser = (userData, history) => dispatch => {
         type: CLEAR_ERRORS,
         payload: {}
       });
-      history.push("/");
+      if (!decoded.isProfileCreated) {
+        history.push("/user/profile");
+      } else {
+        history.push("/");
+      }
     })
     .catch(err => {
       if (err.response) {

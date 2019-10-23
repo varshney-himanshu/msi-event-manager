@@ -11,23 +11,23 @@ class Homepage extends Component {
           data-ride="carousel"
         >
           <div class="carousel-inner">
+            <div class="carousel-item">
+              <img
+                src="https://scontent.fdel8-1.fna.fbcdn.net/v/t1.0-9/51043320_423130491560785_4777862658206466048_n.jpg?_nc_cat=101&_nc_oc=AQkrwFoNs_x_QXeZbl7g1EIwXA52USnnovZW94KTcblYimJal0SP-xEGTuzIasDQaTc&_nc_ht=scontent.fdel8-1.fna&oh=d70c9a6cc57b7918d78f3065c687e7fa&oe=5E191952"
+                class="d-block"
+                alt="..."
+              />
+            </div>
             <div class="carousel-item active">
               <img
-                src="https://i.redd.it/ke0429cnhxt31.jpg"
+                src="https://pbs.twimg.com/media/D-sP3Q7XsAAlkw7?format=jpg&name=4096x4096"
                 class="d-block"
                 alt="..."
               />
             </div>
             <div class="carousel-item">
               <img
-                src="https://i.redd.it/3vigknrd9st31.jpg"
-                class="d-block"
-                alt="..."
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="https://i.redd.it/3vigknrd9st31.jpg"
+                src="https://pbs.twimg.com/media/EBBpUPQXYAADkmp?format=jpg&name=medium"
                 class="d-block"
                 alt="..."
               />
