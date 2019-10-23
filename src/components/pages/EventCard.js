@@ -10,14 +10,14 @@ class EventCard extends Component {
     super(props);
     this.state = {
       isRegistered: false,
-      auth: {}
+      user: {}
     };
   }
 
   static getDerivedStateFromProps(props) {
-    if (props.auth) {
+    if (props.user) {
       return {
-        auth: props.auth
+        user: props.user
       };
     }
   }
@@ -25,7 +25,7 @@ class EventCard extends Component {
   componentDidMount() {
     const { usersRegistered } = this.props.event;
     const ifRegistered = usersRegistered.filter(
-      user => user === this.state.auth.user.id
+      user => user === this.state.user.id
     );
 
     if (ifRegistered.length > 0) {
@@ -34,15 +34,17 @@ class EventCard extends Component {
   }
 
   onClickRegister = () => {
-    const { isAuthenticated } = this.state.auth;
-    if (isAuthenticated) {
+    if (this.state.user) {
       const { _id } = this.props.event;
-      const user_id = this.state.auth.user.id;
+      const user_id = this.state.user.id;
       console.log(_id, user_id);
       axios
-        .put(`https://api-msi-event-manager.now.sh/event/${_id}/add-user`, {
-          user: user_id
-        })
+        .post(
+          `https://api-msi-event-manager.now.sh/event/${_id}/register-user`,
+          {
+            user: user_id
+          }
+        )
         .then(res => {
           if (res.data) {
             this.props.getAllEvents();
@@ -89,7 +91,7 @@ class EventCard extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  user: state.auth.user
 });
 
 export default connect(
