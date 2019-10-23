@@ -37,7 +37,7 @@ class EventCard extends Component {
     const { isAuthenticated } = this.state.auth;
     if (isAuthenticated) {
       const { _id } = this.props.event;
-      const user_id = this.state.user.id;
+      const user_id = this.state.auth.user.id;
       console.log(_id, user_id);
       axios
         .put(`https://api-msi-event-manager.now.sh/event/${_id}/add-user`, {
