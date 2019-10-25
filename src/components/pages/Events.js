@@ -30,7 +30,7 @@ class Events extends Component {
         <hr />
 
         {events.map((event, index) => (
-          <EventCard event={event} />
+          <EventCard key={index + event.id} event={event} />
         ))}
       </div>
     );

@@ -41,3 +41,24 @@ export const registerProfile = (data, history) => dispatch => {
       }
     });
 };
+
+export const registerEvent = (data, history) => dispatch => {
+  axios
+    .post("https://api-msi-event-manager.now.sh/event/register", data)
+    .then(res => {
+      if (res.data) {
+        getAllEvents();
+        history.push("/events");
+      }
+    })
+    .catch(err => {
+      if (err.response) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
+      } else {
+        console.log(err);
+      }
+    });
+};
