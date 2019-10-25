@@ -7,7 +7,9 @@ class Profile extends Component {
     super(props);
     this.state = {
       auth: {},
-      profile: {}
+      profile: {},
+      user: {},
+      loading: true
     };
   }
 
@@ -33,41 +35,60 @@ class Profile extends Component {
         }
       })
       .catch(err => console.log(err));
+
+    axios
+      .get("https://api-msi-event-manager.now.sh/user")
+      .then(res => {
+        if (res.data) {
+          this.setState({ loading: false, user: res.data });
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
-    const { auth, profile } = this.state;
+    const { loading, user, profile } = this.state;
+
     return (
       <div>
-        {!auth.user.isProfileCreated ? (
-          <button> Create Profile </button>
+        {!loading ? (
+          !user.isProfileCreated ? (
+            <button
+              onClick={() => this.props.history.push("/user/profile/create")}
+            >
+              {" "}
+              Create Profile{" "}
+            </button>
+          ) : (
+            <div className="profile" style={{ textAlign: "left" }}>
+              <div>
+                <strong>Name: </strong>
+                {user.name}
+              </div>
+              <div>
+                <strong>Email: </strong>
+                {user.email}
+              </div>
+              <div>
+                <strong>Enrollment ID: </strong>
+                {profile.enrollment_id}
+              </div>
+              <div>
+                <strong>Course: </strong>
+                {profile.course}
+              </div>
+              <div>
+                <strong>Institute: </strong>
+                {profile.institute}
+              </div>
+              <div>
+                <strong>Phone: </strong>
+                {profile.phone}
+              </div>
+            </div>
+          )
         ) : (
-          <div className="profile" style={{ textAlign: "left" }}>
-            <div>
-              <strong>Name: </strong>
-              {auth.user.name}
-            </div>
-            <div>
-              <strong>Email: </strong>
-              {auth.user.email}
-            </div>
-            <div>
-              <strong>Enrollment ID: </strong>
-              {profile.enrollment_id}
-            </div>
-            <div>
-              <strong>Course: </strong>
-              {profile.course}
-            </div>
-            <div>
-              <strong>Institute: </strong>
-              {profile.institute}
-            </div>
-            <div>
-              <strong>Phone: </strong>
-              {profile.phone}
-            </div>
-          </div>
+          <div>loading...</div>
         )}
       </div>
     );

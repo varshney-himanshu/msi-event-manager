@@ -10,22 +10,31 @@ class EventCard extends Component {
     super(props);
     this.state = {
       isRegistered: false,
-      user: {}
+      auth: {}
     };
   }
 
   static getDerivedStateFromProps(props) {
-    if (props.user) {
+    if (props.auth) {
       return {
-        user: props.user
+        auth: props.auth
       };
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.auth.isAuthenticated === true &&
+      this.props.auth.isAuthenticated === false
+    ) {
+      this.setState({ isRegistered: false });
     }
   }
 
   componentDidMount() {
     const { usersRegistered } = this.props.event;
     const ifRegistered = usersRegistered.filter(
-      user => user === this.state.user.id
+      user => user === this.state.auth.user.id
     );
 
     if (ifRegistered.length > 0) {
@@ -34,23 +43,29 @@ class EventCard extends Component {
   }
 
   onClickRegister = () => {
-    if (this.state.user) {
-      const { _id } = this.props.event;
-      const user_id = this.state.user.id;
-      console.log(_id, user_id);
-      axios
-        .post(
-          `https://api-msi-event-manager.now.sh/event/${_id}/register-user`,
-          {
-            user: user_id
-          }
-        )
-        .then(res => {
-          if (res.data) {
-            this.props.getAllEvents();
-          }
-        })
-        .catch(err => console.log(err));
+    const { user, isAuthenticated } = this.state.auth;
+    if (isAuthenticated) {
+      if (user.isProfileCreated) {
+        const { _id } = this.props.event;
+        const user_id = this.state.auth.user.id;
+        console.log(_id, user_id);
+        axios
+          .post(
+            `https://api-msi-event-manager.now.sh/event/${_id}/register-user`,
+            {
+              user: user_id
+            }
+          )
+          .then(res => {
+            if (res.data) {
+              this.setState({ isRegistered: true });
+            }
+          })
+          .catch(err => console.log(err));
+      } else {
+        alert("Please create your profile to register on an event.");
+        this.props.history.push("/user/profile");
+      }
     } else {
       this.props.history.push("/login");
     }
@@ -59,7 +74,7 @@ class EventCard extends Component {
   render() {
     const { event } = this.props;
     const des = event.description.substring(0, 99);
-    const { isRegistered } = this.state;
+    const { isRegistered, auth } = this.state;
     return (
       <div className="event-card">
         <div className="header">
@@ -75,13 +90,13 @@ class EventCard extends Component {
         </div>
         <div className="footer">
           <Timer deadline={event.deadline} />
-          {!isRegistered ? (
-            <button className="event-register" onClick={this.onClickRegister}>
-              Register
-            </button>
-          ) : (
+          {isRegistered ? (
             <button className="event-register" disabled>
               Registered
+            </button>
+          ) : (
+            <button className="event-register" onClick={this.onClickRegister}>
+              Register
             </button>
           )}
         </div>
@@ -91,7 +106,7 @@ class EventCard extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user
+  auth: state.auth
 });
 
 export default connect(

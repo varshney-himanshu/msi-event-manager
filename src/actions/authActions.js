@@ -96,4 +96,5 @@ export const logoutUser = () => dispatch => {
     type: CLEAR_DATA,
     payload: null
   });
+  window.location = "/";
 };

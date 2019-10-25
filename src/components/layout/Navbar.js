@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Navbar.css";
@@ -24,7 +25,7 @@ class Navbar extends Component {
 
   onClickLogout = () => {
     if (window.confirm("Are you sure? Please confirm")) {
-      this.props.logoutUser();
+      this.props.logoutUser(this.props.history);
     }
   };
 
