@@ -20,6 +20,7 @@ import Profile from "./components/pages/Profile";
 import CreateProfile from "./components/pages/CreateProfile";
 import CreateEvent from "./components/pages/CreateEvent";
 import Dashboard from "./components/pages/Dashboard";
+import Test from "./components/Test";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -58,6 +59,7 @@ class App extends Component {
             />
             <Route exact path="/event/create" component={CreateEvent} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/test" component={Test} />
           </Router>
         </div>
       </Provider>

@@ -73,7 +73,7 @@ class EventCard extends Component {
 
   render() {
     const { event } = this.props;
-    const des = event.description.substring(0, 99);
+    const des = event.description.substring(0, 199);
     const { isRegistered, auth } = this.state;
     return (
       <div className="event-card">
@@ -82,7 +82,8 @@ class EventCard extends Component {
         </div>
         <div className="body">
           <p className="description">
-            {des} {des.length === 100 && "..."}
+            {des}
+            {des.length >= 199 && <>....</>}
           </p>
           <p className="venue">
             <strong>Venue: </strong> {event.venue}
