@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Timer from "../Timer";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { getAllEvents } from "../../actions/dataActions";
 import axios from "axios";
 
@@ -78,7 +78,9 @@ class EventCard extends Component {
     return (
       <div className="event-card">
         <div className="header">
-          <h3>{event.title}</h3>
+          <Link to={`/event/${event._id}`}>
+            <h3>{event.title}</h3>
+          </Link>
         </div>
         <div className="body">
           <p className="description">

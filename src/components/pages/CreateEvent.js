@@ -12,7 +12,8 @@ class CreateEvent extends Component {
       description: "",
       errors: {},
       auth: {},
-      dateNow: ""
+      dateNow: "",
+      img: null
     };
   }
 
@@ -35,25 +36,29 @@ class CreateEvent extends Component {
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    switch (e.target.name) {
+      case "img":
+        this.setState({ img: e.target.files[0] });
+        break;
+
+      default:
+        this.setState({ [e.target.name]: e.target.value });
+    }
   };
 
   onSubmit = e => {
     e.preventDefault();
     const { id } = this.state.auth.user;
-    const { title, venue, description, deadline } = this.state;
+    const { title, venue, description, deadline, img } = this.state;
 
-    const data = {
-      creator: id,
-      title,
-      venue,
-      description,
-      deadline
-    };
-
-    // console.log(data);
-    const success = this.props.registerEvent(data, this.props.history);
-    console.log(success);
+    const data = new FormData(); // using FormData to send file to the server
+    data.append("creator", id);
+    data.append("title", title);
+    data.append("venue", venue);
+    data.append("description", description);
+    data.append("imgFile", img);
+    data.append("deadline", deadline);
+    this.props.registerEvent(data, this.props.history);
   };
 
   render() {
@@ -91,6 +96,13 @@ class CreateEvent extends Component {
             value={this.state.deadline}
             onChange={this.onChange}
             min={dateNow}
+          />
+          <br />
+          <input
+            onChange={this.onChange}
+            type="file"
+            name="img"
+            placeholder="upload image for the event"
           />
           <br />
           <button>Submit</button>

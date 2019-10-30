@@ -3,7 +3,8 @@ import Axios from "axios";
 
 export default class Test extends Component {
   state = {
-    image: null
+    image: null,
+    name: ""
   };
 
   onChange = e => {
@@ -21,6 +22,7 @@ export default class Test extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append("imgFile", this.state.image);
+    data.append("name", this.state.name);
     console.log(data);
 
     Axios.post("http://localhost:5000/event/test", data);
@@ -29,7 +31,8 @@ export default class Test extends Component {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-          <input onChange={this.onChange} type="file" name="image" />
+          <input onChange={this.onChange} type="file" name="image" />{" "}
+          <input onChange={this.onChange} type="text" name="name" />
           <button>upload</button>
         </form>
       </div>
