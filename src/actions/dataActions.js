@@ -43,7 +43,8 @@ export const registerProfile = (data, history) => dispatch => {
 };
 
 export const registerEvent = (data, history) => dispatch => {
-  axios
+  console.log(data);
+  axios // https://api-msi-event-manager.now.sh/event/register
     .post("https://api-msi-event-manager.now.sh/event/register", data)
     .then(res => {
       if (res.data) {

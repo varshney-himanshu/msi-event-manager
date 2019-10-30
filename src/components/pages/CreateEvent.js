@@ -103,6 +103,7 @@ class CreateEvent extends Component {
             type="file"
             name="img"
             placeholder="upload image for the event"
+            required
           />
           <br />
           <button>Submit</button>
