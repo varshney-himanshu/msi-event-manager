@@ -1,0 +1,47 @@
+.table {
+  width: 95%;
+  margin: auto;
+}
+
+.row {
+  width: 100%;
+}
+
+.table-head {
+  border: 1px solid black;
+  font-weight: bold;
+}
+
+.table-body {
+}
+
+.table-head div {
+  border-right: 1px solid black;
+}
+
+.table-head,
+.table-row {
+  display: flex;
+}
+
+.table-head div,
+.table-row div {
+  width: 34%;
+  padding: 3px 10px;
+}
+
+.table-row {
+  color: black;
+  border: 1px solid gray;
+  text-align: left;
+}
+
+.table-row div {
+  border-right: 1px solid darkgray;
+}
+
+.table-row:hover {
+  text-decoration: none;
+  background: rgb(220, 244, 252);
+  cursor: pointer;
+}

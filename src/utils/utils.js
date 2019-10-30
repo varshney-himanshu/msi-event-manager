@@ -1,6 +1,7 @@
-export function extractDateFromDateObject(date) {
+export function extractDateString(d) {
   let dateString = "";
 
+  let date = new Date(d);
   if (date !== null) {
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -44,8 +45,8 @@ export function generateID() {
 }
 
 export function arrayBufferToBase64(buffer) {
-  var binary = '';
+  var binary = "";
   var bytes = [].slice.call(new Uint8Array(buffer));
-  bytes.forEach((b) => binary += String.fromCharCode(b));
+  bytes.forEach(b => (binary += String.fromCharCode(b)));
   return window.btoa(binary);
-};
+}

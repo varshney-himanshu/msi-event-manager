@@ -22,6 +22,7 @@ import CreateEvent from "./components/pages/CreateEvent";
 import Dashboard from "./components/pages/Dashboard";
 import Test from "./components/Test";
 import Event from "./components/pages/Event";
+import UserRegistered from "./components/pages/UserRegistered";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -61,6 +62,11 @@ class App extends Component {
             <Switch>
               <Route exact path="/event/create" component={CreateEvent} />
               <Route exact path="/event/:id" component={Event} />
+              <Route
+                exact
+                path="/event/:id/registered"
+                component={UserRegistered}
+              />
             </Switch>
             <Route exact path="/dashboard" component={Dashboard} />
 

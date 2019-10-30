@@ -46,10 +46,10 @@ class Navbar extends Component {
 
   logged_in = state => (
     <>
-      <div class="btn-group dropleft">
+      <div className="btn-group dropleft">
         <button
           type="button"
-          class="btn btn-secondary dropdown-toggle"
+          className="btn btn-secondary dropdown-toggle"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
@@ -57,17 +57,17 @@ class Navbar extends Component {
           {" "}
           {state.auth.user.name}
         </button>
-        <div class="dropdown-menu">
+        <div className="dropdown-menu">
           {state.auth.user.role === "ADMIN" ? (
-            <Link class="dropdown-item" to="/dashboard">
+            <Link className="dropdown-item" to="/dashboard">
               Dashboard
             </Link>
           ) : (
-            <Link class="dropdown-item" to="/user/profile">
+            <Link className="dropdown-item" to="/user/profile">
               Profile
             </Link>
           )}
-          <button onClick={this.onClickLogout} class="dropdown-item">
+          <button onClick={this.onClickLogout} className="dropdown-item">
             Logout
           </button>
         </div>

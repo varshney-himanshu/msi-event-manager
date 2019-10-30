@@ -7,6 +7,7 @@ class CreateProfile extends Component {
     super(props);
     this.state = {
       auth: {},
+      name: "",
       institute: "",
       course: "",
       phone: "",
@@ -37,11 +38,19 @@ class CreateProfile extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { auth, institute, phone, course, enrollment_id } = this.state;
+    const { name, auth, institute, phone, course, enrollment_id } = this.state;
     const user = auth.user.id;
-
-    const data = { user, enrollment_id, phone, course, institute };
-    console.log(data);
+    const email = auth.user.email;
+    const data = {
+      fullName: name,
+      email,
+      user,
+      enrollment_id,
+      phone,
+      course,
+      institute
+    };
+    //console.log(data);
 
     this.props.registerProfile(data, this.props.history);
   };
@@ -50,6 +59,15 @@ class CreateProfile extends Component {
     return (
       <div className="form">
         <form onSubmit={this.onSubmit}>
+          <input
+            type="text"
+            name="name"
+            value={this.state.name}
+            placeholder="Full Name"
+            onChange={this.onChange}
+            required
+          />
+          <br />
           <input
             type="text"
             name="enrollment_id"
@@ -85,7 +103,6 @@ class CreateProfile extends Component {
             <option value=">B.ED.">B.ED.</option>
           </select>
           <br />
-
           <select
             name="institute"
             onChange={this.onChange}
@@ -99,7 +116,6 @@ class CreateProfile extends Component {
               Maharaja Surajmal Institute
             </option>
           </select>
-
           <br></br>
           <button type="submit">Submit</button>
         </form>

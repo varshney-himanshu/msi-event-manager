@@ -1,17 +1,31 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { arrayBufferToBase64 } from "../../utils/utils";
+import { arrayBufferToBase64, extractDateString } from "../../utils/utils";
+import Timer from "../Timer";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class Event extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      auth: {},
       event: {},
       loading: true,
-      img: ""
+      img: "",
+      usersRegistered: []
     };
   }
+
+  static getDerivedStateFromProps(props) {
+    if (props.auth) {
+      return {
+        auth: props.auth
+      };
+    }
+  }
+
   componentDidMount() {
     const id = this.props.match.params.id;
     axios
@@ -37,7 +51,7 @@ class Event extends Component {
   }
 
   render() {
-    const { event, img, loading } = this.state;
+    const { event, img, loading, auth, usersRegistered } = this.state;
 
     if (loading) {
       return <div>loading....</div>;
@@ -47,13 +61,34 @@ class Event extends Component {
           <h1>{event.title}</h1>
           <p>{event.description}</p>
           <div>
+            <strong>Registration Deadline:</strong>{" "}
+            {extractDateString(event.deadline)}
+          </div>
+          <Timer deadline={event.deadline} />
+          <div>
             <strong>Venue:</strong> {event.venue}
           </div>
           <div>{}</div>
           <img width="50%" src={img} />
+          <button
+            onClick={() =>
+              this.props.history.push(
+                `/event/${this.props.match.params.id}/registered`
+              )
+            }
+          >
+            Users Registered
+          </button>
         </div>
       );
     }
   }
 }
-export default Event;
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  null
+)(withRouter(Event));
