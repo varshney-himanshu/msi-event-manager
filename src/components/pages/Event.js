@@ -18,12 +18,12 @@ class Event extends Component {
       .get(`https://api-msi-event-manager.now.sh/event/${id}`)
       .then(res => {
         if (res.data) {
-          var base64Flag = "data:image/jpeg;base64,";
-          var imgStr = arrayBufferToBase64(res.data.image.data.data);
-          this.setState({
-            event: res.data,
-            img: base64Flag + imgStr,
-            loading: false
+          this.setState({ event: res.data, loading: false }, () => {
+            var base64Flag = "data:image/jpeg;base64,";
+            var imgStr = arrayBufferToBase64(res.data.image.data.data);
+            this.setState({
+              img: base64Flag + imgStr
+            });
           });
         }
       })
