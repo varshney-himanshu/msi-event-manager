@@ -70,15 +70,20 @@ class Event extends Component {
           </div>
           <div>{}</div>
           <img width="50%" src={img} />
-          <button
-            onClick={() =>
-              this.props.history.push(
-                `/event/${this.props.match.params.id}/registered`
-              )
-            }
-          >
-            Users Registered
-          </button>
+
+          {auth.isAuthenticated && auth.user.role === "ADMIN" ? (
+            <button
+              onClick={() =>
+                this.props.history.push(
+                  `/event/${this.props.match.params.id}/registered`
+                )
+              }
+            >
+              Users Registered
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
       );
     }

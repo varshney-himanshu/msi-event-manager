@@ -11,9 +11,22 @@ class Dashboard extends Component {
 
     this.state = {
       eventsLoading: true,
-      events: []
+      events: [],
+      image: null,
+      event: ""
     };
   }
+
+  onChangeInput = e => {
+    switch (e.target.name) {
+      case "image":
+        this.setState({ image: e.target.files[0] });
+        break;
+
+      default:
+        this.setState({ [e.target.name]: e.target.value });
+    }
+  };
 
   componentDidMount() {
     axios
@@ -29,6 +42,22 @@ class Dashboard extends Component {
         }
       });
   }
+
+  onUpload = e => {
+    e.preventDefault();
+
+    const { image } = this.state;
+    let data = new FormData();
+    data.append("image", image);
+
+    axios
+      .post("https://api-msi-event-manager.now.sh/image/home/add", data)
+      .then(res => {
+        if (res.data) {
+          alert(res.data.sucess);
+        }
+      });
+  };
 
   render() {
     const { events, eventsLoading } = this.state;
@@ -65,6 +94,11 @@ class Dashboard extends Component {
             ) : (
               <div>loading...</div>
             )}
+
+            <form onSubmit={this.onUpload}>
+              <input type="file" name="image" onChange={this.onChangeInput} />
+              <button>upload</button>
+            </form>
           </div>
           <div className="col col-12 col-md-2">
             <button onClick={() => this.props.history.push("/event/create")}>

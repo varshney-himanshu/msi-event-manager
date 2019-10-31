@@ -12,6 +12,7 @@ import Homepage from "./components/pages/Homepage";
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { getHomeImages } from "./actions/dataActions";
 import Navbar from "./components/layout/Navbar";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
@@ -24,6 +25,7 @@ import Test from "./components/Test";
 import Event from "./components/pages/Event";
 import UserRegistered from "./components/pages/UserRegistered";
 
+store.dispatch(getHomeImages());
 if (localStorage.jwtToken) {
   // Set auth token header auth
   setAuthToken(localStorage.jwtToken);

@@ -1,63 +1,43 @@
 import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./Homepage.css";
+import { connect } from "react-redux";
+import Slider from "../layout/Slider";
+
 class Homepage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      homeimages: []
+    };
+  }
+
+  static getDerivedStateFromProps(props) {
+    if (props.homeimages) {
+      return {
+        homeimages: props.homeimages
+      };
+    }
+  }
+
   render() {
+    const { homeimages } = this.state;
+    console.log(homeimages);
     return (
       <div>
-        <div
-          id="carouselExampleControls"
-          class="carousel slide"
-          data-ride="carousel"
-        >
-          <div class="carousel-inner">
-            <div class="carousel-item">
-              <img
-                src="https://scontent.fdel8-1.fna.fbcdn.net/v/t1.0-9/51043320_423130491560785_4777862658206466048_n.jpg?_nc_cat=101&_nc_oc=AQkrwFoNs_x_QXeZbl7g1EIwXA52USnnovZW94KTcblYimJal0SP-xEGTuzIasDQaTc&_nc_ht=scontent.fdel8-1.fna&oh=d70c9a6cc57b7918d78f3065c687e7fa&oe=5E191952"
-                class="d-block"
-                alt="..."
-              />
-            </div>
-            <div class="carousel-item active">
-              <img
-                src="https://pbs.twimg.com/media/D-sP3Q7XsAAlkw7?format=jpg&name=4096x4096"
-                class="d-block"
-                alt="..."
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="https://pbs.twimg.com/media/EBBpUPQXYAADkmp?format=jpg&name=medium"
-                class="d-block"
-                alt="..."
-              />
-            </div>
-          </div>
-          <a
-            class="carousel-control-prev"
-            href="#carouselExampleControls"
-            role="button"
-            data-slide="prev"
-          >
-            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a
-            class="carousel-control-next"
-            href="#carouselExampleControls"
-            role="button"
-            data-slide="next"
-          >
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            <span class="sr-only">Next</span>
-          </a>
+        <Slider images={homeimages} />
+        <div className="row">
+          <div className="col-md-9"></div>
+          <div className="col-md-3"></div>
         </div>
-        <div className="row"></div>
-        <div className="col-md-9"></div>
-        <div className="col-md-3"></div>
       </div>
     );
   }
 }
+const mapStateToProps = state => ({
+  homeimages: state.data.homeimages
+});
 
-export default Homepage;
+export default connect(
+  mapStateToProps,
+  null
+)(Homepage);

@@ -14,6 +14,10 @@ class Timer extends React.Component {
     this.state = initialState;
   }
 
+  static defaultProps = {
+    endDeadline: () => {}
+  };
+
   componentDidMount() {
     if (this.props.deadline) {
       this.interval = setInterval(() => {
@@ -29,6 +33,7 @@ class Timer extends React.Component {
         if (rt <= 0) {
           this.setState({ initialState });
           clearInterval(this.interval);
+          this.props.endDeadline();
         }
       }, 1000);
     }

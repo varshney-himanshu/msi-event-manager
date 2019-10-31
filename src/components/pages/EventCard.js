@@ -10,7 +10,8 @@ class EventCard extends Component {
     super(props);
     this.state = {
       isRegistered: false,
-      auth: {}
+      auth: {},
+      deadlineEnded: false
     };
   }
 
@@ -30,7 +31,9 @@ class EventCard extends Component {
       this.setState({ isRegistered: false });
     }
   }
-
+  endDeadline = () => {
+    this.setState({ deadlineEnded: true });
+  };
   componentDidMount() {
     const { usersRegistered } = this.props.event;
     const ifRegistered = usersRegistered.filter(
@@ -74,7 +77,7 @@ class EventCard extends Component {
   render() {
     const { event } = this.props;
     const des = event.description.substring(0, 199);
-    const { isRegistered, auth } = this.state;
+    const { isRegistered, deadlineEnded, auth } = this.state;
     return (
       <div className="event-card">
         <div className="header">
@@ -92,15 +95,30 @@ class EventCard extends Component {
           </p>
         </div>
         <div className="footer">
-          <Timer deadline={event.deadline} />
-          {isRegistered ? (
-            <button className="event-register" disabled>
-              Registered
-            </button>
+          {deadlineEnded ? (
+            <div>Registration Closed!</div>
           ) : (
-            <button className="event-register" onClick={this.onClickRegister}>
-              Register
-            </button>
+            <>
+              <Timer endDeadline={this.endDeadline} deadline={event.deadline} />
+
+              {auth.user.role === "STUDENT" ||
+              auth.isAuthenticated === false ? (
+                <>
+                  {isRegistered ? (
+                    <button className="event-register" disabled>
+                      Registered
+                    </button>
+                  ) : (
+                    <button
+                      className="event-register"
+                      onClick={this.onClickRegister}
+                    >
+                      Register
+                    </button>
+                  )}
+                </>
+              ) : null}
+            </>
           )}
         </div>
       </div>

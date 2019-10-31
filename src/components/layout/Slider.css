@@ -1,0 +1,29 @@
+.carousel {
+  box-shadow: 10px 0 5px black !important;
+}
+
+.carousel .slide {
+  background: #537d91;
+}
+.carousel img {
+  height: 550px;
+  width: auto !important;
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.452); */
+}
+
+.carousel .slide:hover {
+  cursor: pointer;
+}
+
+.legend {
+  background: #537d91 !important;
+  color: white !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  left: 0px !important;
+  /* font-weight: bold; */
+  font-size: 22px !important;
+  border-radius: 0 !important;
+}

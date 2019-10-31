@@ -6,6 +6,9 @@
   background: white;
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.452);
+  position: relative;
+  z-index: 100;
 }
 
 .nav-link {
