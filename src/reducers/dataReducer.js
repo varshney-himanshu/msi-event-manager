@@ -1,9 +1,10 @@
-import isEmpty from "../validation/is-empty";
-import { SET_ALL_EVENTS, SET_HOME_IMAGES } from "../actions/types";
+import { SET_ALL_EVENTS, SET_HOME_IMAGES, SET_NOTICE } from "../actions/types";
 
 const initialState = {
   allEvents: [],
-  homeimages: []
+  homeimages: [],
+  imagesLoaded: false,
+  notice: {}
 };
 
 export default function(state = initialState, action) {
@@ -17,7 +18,14 @@ export default function(state = initialState, action) {
     case SET_HOME_IMAGES:
       return {
         ...state,
-        homeimages: action.payload
+        homeimages: action.payload,
+        imagesLoaded: true
+      };
+
+    case SET_NOTICE:
+      return {
+        ...state,
+        notice: action.payload
       };
 
     default:

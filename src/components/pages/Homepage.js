@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Homepage.css";
 import { connect } from "react-redux";
 import Slider from "../layout/Slider";
+import Notice from "../layout/Notice";
 
 class Homepage extends Component {
   constructor(props) {
@@ -27,7 +28,9 @@ class Homepage extends Component {
         <Slider images={homeimages} />
         <div className="row">
           <div className="col-md-9"></div>
-          <div className="col-md-3"></div>
+          <div className="col-md-3">
+            <Notice />
+          </div>
         </div>
       </div>
     );

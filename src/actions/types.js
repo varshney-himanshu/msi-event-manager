@@ -5,3 +5,4 @@ export const SET_ALL_EVENTS = "SET_ALL_EVENTS";
 export const SET_USERS = "SET_USERS";
 export const CLEAR_DATA = "CLEAR_DATA";
 export const SET_HOME_IMAGES = "SET_HOME_IMAGES";
+export const SET_NOTICE = "SET_NOTICE";

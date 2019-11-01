@@ -100,3 +100,5 @@ export const getHomeImages = () => dispatch => {
       }
     });
 };
+
+export const getLatestNotice = () => dispatch => {};

@@ -24,6 +24,9 @@ import Dashboard from "./components/pages/Dashboard";
 import Test from "./components/Test";
 import Event from "./components/pages/Event";
 import UserRegistered from "./components/pages/UserRegistered";
+import LoadingScreen from "react-loading-screen";
+import isEmpty from "./validation/is-empty";
+import logo from "./logo.png";
 
 store.dispatch(getHomeImages());
 store.dispatch(getAllEvents());
@@ -47,36 +50,60 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loading: true
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 2000);
+  }
+
   render() {
+    const state = store.getState();
+    const { loading } = this.state;
     return (
       <Provider store={store}>
-        <div className="App">
-          <Router>
-            <Navbar />
-            <Route exact path="/" component={Homepage} />
-            <Route exact path="/events" component={Events} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/user/profile" component={Profile} />
-            <Route
-              exact
-              path="/user/profile/create"
-              component={CreateProfile}
-            />
-            <Switch>
-              <Route exact path="/event/create" component={CreateEvent} />
-              <Route exact path="/event/:id" component={Event} />
+        <LoadingScreen
+          loading={loading}
+          bgColor="#226b80"
+          spinnerColor="#9ee5f8"
+          textColor="white"
+          logoSrc={logo}
+          text="Hi there. Welcome to MSI Events"
+        >
+          <div className="App">
+            <Router>
+              <Navbar />
+              <Route exact path="/" component={Homepage} />
+              <Route exact path="/events" component={Events} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/user/profile" component={Profile} />
               <Route
                 exact
-                path="/event/:id/registered"
-                component={UserRegistered}
+                path="/user/profile/create"
+                component={CreateProfile}
               />
-            </Switch>
-            <Route exact path="/dashboard" component={Dashboard} />
+              <Switch>
+                <Route exact path="/event/create" component={CreateEvent} />
+                <Route exact path="/event/:id" component={Event} />
+                <Route
+                  exact
+                  path="/event/:id/registered"
+                  component={UserRegistered}
+                />
+              </Switch>
+              <Route exact path="/dashboard" component={Dashboard} />
 
-            <Route exact path="/test" component={Test} />
-          </Router>
-        </div>
+              <Route exact path="/test" component={Test} />
+            </Router>
+          </div>
+        </LoadingScreen>
       </Provider>
     );
   }
