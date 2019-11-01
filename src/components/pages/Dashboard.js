@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+import { getHomeImages } from "../../actions/dataActions";
 import axios from "axios";
 import "./Dashboard.css";
 import { extractDateString } from "../../utils/utils";
@@ -13,20 +14,18 @@ class Dashboard extends Component {
       eventsLoading: true,
       events: [],
       image: null,
-      event: ""
+      event: "",
+      homeimages: []
     };
   }
 
-  onChangeInput = e => {
-    switch (e.target.name) {
-      case "image":
-        this.setState({ image: e.target.files[0] });
-        break;
-
-      default:
-        this.setState({ [e.target.name]: e.target.value });
+  static getDerivedStateFromProps(props) {
+    if (props.homeimages) {
+      return {
+        homeimages: props.homeimages
+      };
     }
-  };
+  }
 
   componentDidMount() {
     axios
@@ -43,6 +42,17 @@ class Dashboard extends Component {
       });
   }
 
+  onChangeInput = e => {
+    switch (e.target.name) {
+      case "image":
+        this.setState({ image: e.target.files[0] });
+        break;
+
+      default:
+        this.setState({ [e.target.name]: e.target.value });
+    }
+  };
+
   onUpload = e => {
     e.preventDefault();
 
@@ -54,15 +64,26 @@ class Dashboard extends Component {
       .post("https://api-msi-event-manager.now.sh/image/home/add", data)
       .then(res => {
         if (res.data) {
-          alert(res.data.sucess);
+          this.props.getHomeImages();
+        }
+      });
+  };
+
+  onClickDelete = id => {
+    axios
+      .delete(`https://api-msi-event-manager.now.sh/image/home/${id}`)
+      .then(res => {
+        if (res.data) {
+          this.props.getHomeImages();
+          alert("deleted");
         }
       });
   };
 
   render() {
-    const { events, eventsLoading } = this.state;
+    const { events, eventsLoading, homeimages } = this.state;
     return (
-      <div>
+      <div className="dashboard">
         <div className="row">
           <div className="col col-12 col-md-10">
             <h3>Your Events</h3>
@@ -94,11 +115,6 @@ class Dashboard extends Component {
             ) : (
               <div>loading...</div>
             )}
-
-            <form onSubmit={this.onUpload}>
-              <input type="file" name="image" onChange={this.onChangeInput} />
-              <button>upload</button>
-            </form>
           </div>
           <div className="col col-12 col-md-2">
             <button onClick={() => this.props.history.push("/event/create")}>
@@ -106,15 +122,39 @@ class Dashboard extends Component {
             </button>
           </div>
         </div>
+
+        <div className="home-images">
+          <h3>Homepage Management</h3>
+          <div className="images-thumbnails">
+            {homeimages.map(image => (
+              <div key={image.id} className="thumbnail">
+                <button
+                  onClick={() => {
+                    this.onClickDelete(image.id);
+                  }}
+                  className="img-delete-btn"
+                >
+                  &#x292B;
+                </button>
+                <img src={image.img} />
+              </div>
+            ))}
+          </div>
+          <form onSubmit={this.onUpload}>
+            <input type="file" name="image" onChange={this.onChangeInput} />
+            <button>upload</button>
+          </form>
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  homeimages: state.data.homeimages
 });
 export default connect(
   mapStateToProps,
-  null
+  { getHomeImages }
 )(withRouter(Dashboard));
