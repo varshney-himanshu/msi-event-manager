@@ -1,4 +1,9 @@
-import { SET_ALL_EVENTS, SET_HOME_IMAGES, GET_ERRORS } from "./types";
+import {
+  SET_ALL_EVENTS,
+  SET_NOTICE,
+  SET_HOME_IMAGES,
+  GET_ERRORS
+} from "./types";
 import axios from "axios";
 import { arrayBufferToBase64 } from "../utils/utils";
 
@@ -50,7 +55,7 @@ export const registerEvent = (data, history) => dispatch => {
     .then(res => {
       if (res.data) {
         getAllEvents();
-        history.push("/events");
+        history.push("/dashboard");
       }
     })
     .catch(err => {
@@ -101,4 +106,21 @@ export const getHomeImages = () => dispatch => {
     });
 };
 
-export const getLatestNotice = () => dispatch => {};
+export const getLatestNotice = () => dispatch => {
+  axios("https://api-msi-event-manager.now.sh/notice/latest")
+    .then(res => {
+      if (res.data) {
+        dispatch({
+          type: SET_NOTICE,
+          payload: res.data
+        });
+      }
+    })
+    .catch(err => {
+      if (err.response) {
+        dispatch({ type: GET_ERRORS, payload: err.response.data });
+      } else {
+        console.log(err);
+      }
+    });
+};

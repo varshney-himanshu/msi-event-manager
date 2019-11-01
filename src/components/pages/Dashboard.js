@@ -5,6 +5,7 @@ import { getHomeImages } from "../../actions/dataActions";
 import axios from "axios";
 import "./Dashboard.css";
 import { extractDateString } from "../../utils/utils";
+import loading from "../../loading.gif";
 
 class Dashboard extends Component {
   constructor() {
@@ -87,44 +88,62 @@ class Dashboard extends Component {
         <div className="row">
           <div className="col col-12 col-md-10">
             <h3>Your Events</h3>
-            {!eventsLoading ? (
-              <div className="table">
-                <div className="table-head">
-                  <div>Title</div>
-                  <div>venue</div>
-                  <div>deadline</div>
+            <div className="dashboard-events">
+              {!eventsLoading ? (
+                <>
+                  <div className="dashboard-events-body">
+                    {events.map(event => (
+                      <div key={event._id} className="dashboard-event">
+                        <div className="dashboard-event-title">
+                          <strong>{event.title}</strong>
+                        </div>
+                        <div className="dashboard-event-venue">
+                          <strong className="venue">Venue: </strong>
+                          {event.venue}
+                        </div>
+                        <div className="dashboard-event-deadline">
+                          <strong className="deadline">Deadline: </strong>
+                          {extractDateString(event.deadline)}
+                        </div>
+
+                        <div className="dashboard-event-btns">
+                          <button
+                            onClick={() =>
+                              this.props.history.push(
+                                "/event/" + event._id.toString()
+                              )
+                            }
+                            className="view"
+                          >
+                            View
+                          </button>
+                          <button className="edit">&#9998;</button>
+                          <button className="delete">&times;</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <div className="loading">
+                  <img src={loading} />
                 </div>
-                <div className="table-body">
-                  {events.map(event => (
-                    <div
-                      key={event._id}
-                      onClick={() =>
-                        this.props.history.push(
-                          "/event/" + event._id.toString()
-                        )
-                      }
-                      className="table-row"
-                    >
-                      <div>{event.title}</div>
-                      <div>{event.venue}</div>
-                      <div>{extractDateString(event.deadline)}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <div>loading...</div>
-            )}
+              )}
+            </div>
           </div>
           <div className="col col-12 col-md-2">
             <button onClick={() => this.props.history.push("/event/create")}>
               Add Event
             </button>
+            <button onClick={() => this.props.history.push("/notice/add")}>
+              Add Notice
+            </button>
           </div>
         </div>
 
         <div className="home-images">
-          <h3>Homepage Management</h3>
+          <h5 style={{color: "gray"}}>Homepage Management</h5>
+           <hr></hr>
           <div className="images-thumbnails">
             {homeimages.map(image => (
               <div key={image.id} className="thumbnail">

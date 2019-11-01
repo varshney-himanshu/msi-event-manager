@@ -12,7 +12,11 @@ import Homepage from "./components/pages/Homepage";
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
-import { getHomeImages, getAllEvents } from "./actions/dataActions";
+import {
+  getHomeImages,
+  getAllEvents,
+  getLatestNotice
+} from "./actions/dataActions";
 import Navbar from "./components/layout/Navbar";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
@@ -27,9 +31,11 @@ import UserRegistered from "./components/pages/UserRegistered";
 import LoadingScreen from "react-loading-screen";
 import isEmpty from "./validation/is-empty";
 import logo from "./logo.png";
+import AddNotice from "./components/pages/AddNotice";
 
 store.dispatch(getHomeImages());
 store.dispatch(getAllEvents());
+store.dispatch(getLatestNotice());
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -53,7 +59,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loading: true
+      loading: false
     };
   }
 
@@ -99,6 +105,7 @@ class App extends Component {
                 />
               </Switch>
               <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/notice/add" component={AddNotice} />
 
               <Route exact path="/test" component={Test} />
             </Router>

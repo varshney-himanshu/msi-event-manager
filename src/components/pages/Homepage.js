@@ -8,20 +8,22 @@ class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      homeimages: []
+      homeimages: [],
+      notice: {}
     };
   }
 
   static getDerivedStateFromProps(props) {
     if (props.homeimages) {
       return {
-        homeimages: props.homeimages
+        homeimages: props.homeimages,
+        notice: props.notice
       };
     }
   }
 
   render() {
-    const { homeimages } = this.state;
+    const { homeimages, notice } = this.state;
     console.log(homeimages);
     return (
       <div>
@@ -29,7 +31,7 @@ class Homepage extends Component {
         <div className="row">
           <div className="col-md-9"></div>
           <div className="col-md-3">
-            <Notice />
+            <Notice text={notice.text} />
           </div>
         </div>
       </div>
@@ -37,7 +39,8 @@ class Homepage extends Component {
   }
 }
 const mapStateToProps = state => ({
-  homeimages: state.data.homeimages
+  homeimages: state.data.homeimages,
+  notice: state.data.notice
 });
 
 export default connect(
