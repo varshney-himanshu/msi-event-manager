@@ -13,7 +13,7 @@ class Slider extends Component {
     const { images } = this.props;
     return (
       <div>
-        <Carousel showThumbs={false} autoPlay infiniteLoop="true">
+        <Carousel showThumbs={false} infiniteLoop={true} autoPlay={true}>
           {images.map(image => (
             <div>
               <img src={image.img} />
