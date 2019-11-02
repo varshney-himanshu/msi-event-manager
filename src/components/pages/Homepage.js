@@ -27,9 +27,9 @@ class Homepage extends Component {
     console.log(homeimages);
     return (
       <div>
-        <Slider images={homeimages} />
         <div className="row">
-          <div className="col-md-9"></div>
+          <div className="col-md-9">
+        <Slider images={homeimages} /></div>
           <div className="col-md-3">
             <Notice text={notice.text} />
           </div>

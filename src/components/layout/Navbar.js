@@ -91,7 +91,7 @@ class Navbar extends Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <i class="fa fa-bars" aria-hidden="true"></i>
+            &#9776;
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">

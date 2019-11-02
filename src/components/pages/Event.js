@@ -4,6 +4,8 @@ import { arrayBufferToBase64, extractDateString } from "../../utils/utils";
 import Timer from "../Timer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import loader from "../../loading.gif";
+import "./Event.css";
 
 class Event extends Component {
   constructor(props) {
@@ -13,7 +15,6 @@ class Event extends Component {
       auth: {},
       event: {},
       loading: true,
-      img: "",
       usersRegistered: []
     };
   }
@@ -32,13 +33,7 @@ class Event extends Component {
       .get(`https://api-msi-event-manager.now.sh/event/${id}`)
       .then(res => {
         if (res.data) {
-          this.setState({ event: res.data, loading: false }, () => {
-            var base64Flag = "data:image/jpeg;base64,";
-            var imgStr = arrayBufferToBase64(res.data.image.data.data);
-            this.setState({
-              img: base64Flag + imgStr
-            });
-          });
+          this.setState({ event: res.data, loading: false });
         }
       })
       .catch(err => {
@@ -51,10 +46,14 @@ class Event extends Component {
   }
 
   render() {
-    const { event, img, loading, auth, usersRegistered } = this.state;
+    const { event, loading, auth, usersRegistered } = this.state;
 
     if (loading) {
-      return <div>loading....</div>;
+      return (
+        <div className="event-loader">
+          <img src={loader} />
+        </div>
+      );
     } else {
       return (
         <div>
@@ -69,7 +68,7 @@ class Event extends Component {
             <strong>Venue:</strong> {event.venue}
           </div>
           <div>{}</div>
-          <img width="50%" src={img} />
+          <img width="50%" src={event.image.url} />
 
           {auth.isAuthenticated && auth.user.role === "ADMIN" ? (
             <button

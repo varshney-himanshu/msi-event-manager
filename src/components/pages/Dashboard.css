@@ -85,7 +85,7 @@
 .delete {
   font-weight: bold;
   font-size: 1.1em;
-  padding: 0 8px;
+  padding: 0 7px;
 }
 
 .delete:hover {
@@ -148,4 +148,17 @@
 
 .img-delete-btn:hover {
   background: rgba(167, 23, 23, 0.959);
+}
+.dashboard-btns button {
+  background: none;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 3px 6px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.dashboard-btns button:hover {
+  background: gray;
+  color: white;
 }

@@ -21,12 +21,10 @@
 }
 
 .navbar-toggler {
-  border: 2px solid black;
+  font-weight: bold;
+  font-size: 1.7em;
 }
-.fa-bars {
-  color: black;
-  font-size: 30px;
-}
+
 button.login,
 button.register {
   background: none;

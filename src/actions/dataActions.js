@@ -5,7 +5,7 @@ import {
   GET_ERRORS
 } from "./types";
 import axios from "axios";
-import { arrayBufferToBase64 } from "../utils/utils";
+// import { arrayBufferToBase64 } from "../utils/utils";
 
 export const getAllEvents = () => dispatch => {
   axios
@@ -75,22 +75,9 @@ export const getHomeImages = () => dispatch => {
     .get("https://api-msi-event-manager.now.sh/image/home")
     .then(res => {
       if (res.data) {
-        const bufferImages = res.data;
-        let images = bufferImages.map(img => {
-          var base64Flag = "data:image/jpeg;base64,";
-          var imgStr = arrayBufferToBase64(img.image.data.data);
-          const image = {
-            id: img._id,
-            img: base64Flag + imgStr,
-            event: img.event,
-            msg: img.msg
-          };
-          return image;
-        });
-
         dispatch({
           type: SET_HOME_IMAGES,
-          payload: images
+          payload: res.data
         });
       }
     })

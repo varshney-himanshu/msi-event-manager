@@ -15,8 +15,8 @@ class Slider extends Component {
       <div>
         <Carousel showThumbs={false} infiniteLoop={true} autoPlay={true}>
           {images.map(image => (
-            <div>
-              <img src={image.img} />
+            <div key={image._id}>
+              <img src={image.data.url} />
               <p
                 onClick={() => {
                   this.props.history.push(`/event/${image.event}`);

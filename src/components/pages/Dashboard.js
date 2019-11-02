@@ -61,7 +61,7 @@ class Dashboard extends Component {
     let data = new FormData();
     data.append("image", image);
 
-    axios
+    axios //https://api-msi-event-manager.now.sh/image/home/add
       .post("https://api-msi-event-manager.now.sh/image/home/add", data)
       .then(res => {
         if (res.data) {
@@ -131,31 +131,31 @@ class Dashboard extends Component {
               )}
             </div>
           </div>
-          <div className="col col-12 col-md-2">
+          <div className="col col-12 col-md-2 dashboard-btns ">
             <button onClick={() => this.props.history.push("/event/create")}>
-              Add Event
+              Add Event <strong>&#43;</strong>
             </button>
             <button onClick={() => this.props.history.push("/notice/add")}>
-              Add Notice
+              Add Notice <strong>&#43;</strong>
             </button>
           </div>
         </div>
 
         <div className="home-images">
-          <h5 style={{color: "gray"}}>Homepage Management</h5>
-           <hr></hr>
+          <h5 style={{ color: "gray" }}>Homepage Management</h5>
+          <hr></hr>
           <div className="images-thumbnails">
             {homeimages.map(image => (
-              <div key={image.id} className="thumbnail">
+              <div key={image._id} className="thumbnail">
                 <button
                   onClick={() => {
-                    this.onClickDelete(image.id);
+                    this.onClickDelete(image._id);
                   }}
                   className="img-delete-btn"
                 >
                   &#x292B;
                 </button>
-                <img src={image.img} />
+                <img src={image.data.url} />
               </div>
             ))}
           </div>

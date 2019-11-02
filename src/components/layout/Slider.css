@@ -1,12 +1,14 @@
 .carousel {
-  box-shadow: 10px 0 5px black !important;
+  margin: 20px 10px !important;
 }
 
 .carousel .slide {
-  background: #537d91;
+  background: #7d8f97;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.637);
+  border-radius: 4px;
 }
 .carousel img {
-  height: 550px;
+  height: 450px;
   width: auto !important;
   /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.452); */
 }

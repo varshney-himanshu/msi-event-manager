@@ -1,20 +1,6 @@
-/* .carousel {
-  margin-top: 3vh;
-  background: lightgray;
-  padding: 10px 0;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+.col {
+  background: transparent;
 }
-.carousel img {
-  height: 70vh;
-  margin: auto;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
-}
-.carousel-control-prev-icon {
-  color: black !important;
-} */
-/*  */
-
 .fa {
   color: black;
 }
