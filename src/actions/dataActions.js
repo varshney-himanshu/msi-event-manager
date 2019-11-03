@@ -54,7 +54,7 @@ export const registerEvent = (data, history) => dispatch => {
     .post("https://api-msi-event-manager.now.sh/event/register", data)
     .then(res => {
       if (res.data) {
-        getAllEvents();
+        dispatch(getAllEvents());
         history.push("/dashboard");
       }
     })

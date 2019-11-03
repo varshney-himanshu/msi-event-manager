@@ -9,36 +9,72 @@
 }
 
 .event-card {
-  border: 1px solid black;
   width: 60%;
   margin: auto;
   text-align: left;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
   margin-bottom: 20px;
   border-radius: 5px;
-  background: rgb(192, 255, 250);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
 }
 
-.event-card h3 {
-  border-bottom: 1px solid black;
-  padding-bottom: 4px;
+.event-card .header {
+  background-color: #1a3e59;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  padding: 5px 15px;
+}
+.event-card .header h3 {
   margin-bottom: 0;
-  text-align: center;
+  text-align: left;
+  color: #f2eee5;
+}
+
+.event-card .header button {
+  border: 1px solid #f2eee5;
+  background: none;
+  color: #f2eee5;
+  margin-left: auto;
+  font-weight: 500;
+  border-radius: 5px;
+}
+.event-card .header button:hover {
+  background: #f2eee5;
+  color: #1a3e59;
+}
+
+.event-card .body {
+  background-color: #f2eee5;
 }
 
 .event-card p {
+  padding: 0 15px;
+  border-bottom: 1px solid lightgray;
   margin: 0;
+  font-weight: 500;
 }
 
 .event-card .footer {
+  border-top: 1px solid darkgray;
+  padding: 0px 10px 5px;
+  border-radius: 0 0 5px 5px;
   display: flex;
+  background-color: #f2eee5;
 }
 
 .event-register {
+  border-radius: 3px;
   background: none;
-  border: 1px solid black;
+  font-weight: 500;
+  border: 1px solid #1a3e59;
   margin-left: auto;
+  color: #1a3e59;
+  margin-top: 5px;
+}
+
+.event-register:hover {
+  background-color: #1a3e59;
+  color: #f2eee5;
 }
 
 @media only screen and (max-width: 600px) {

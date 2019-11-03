@@ -15,6 +15,15 @@ class EventCard extends Component {
     };
   }
 
+  static defaultProps = {
+    event: {
+      title: "",
+      description: "",
+      deadline: Date.now,
+      venue: "",
+      usersRegistered: []
+    }
+  };
   static getDerivedStateFromProps(props) {
     if (props.auth) {
       return {
@@ -81,9 +90,12 @@ class EventCard extends Component {
     return (
       <div className="event-card">
         <div className="header">
-          <Link to={`/event/${event._id}`}>
-            <h3>{event.title}</h3>
-          </Link>
+          <h3>{event.title}</h3>
+          <button
+            onClick={() => this.props.history.push(`/event/${event._id}`)}
+          >
+            View
+          </button>
         </div>
         <div className="body">
           <p className="description">
