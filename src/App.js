@@ -32,6 +32,7 @@ import LoadingScreen from "react-loading-screen";
 import isEmpty from "./validation/is-empty";
 import logo from "./logo.png";
 import AddNotice from "./components/pages/AddNotice";
+import EditEvent from "./components/pages/EditEvent";
 
 store.dispatch(getHomeImages());
 store.dispatch(getAllEvents());
@@ -97,6 +98,8 @@ class App extends Component {
               />
               <Switch>
                 <Route exact path="/event/create" component={CreateEvent} />
+                <Route exact path="/event/edit/:id" component={EditEvent} />
+
                 <Route exact path="/event/:id" component={Event} />
                 <Route
                   exact

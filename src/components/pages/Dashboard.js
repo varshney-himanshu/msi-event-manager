@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import { getHomeImages } from "../../actions/dataActions";
+import { getHomeImages, getAllEvents } from "../../actions/dataActions";
 import axios from "axios";
 import "./Dashboard.css";
 import { extractDateString } from "../../utils/utils";
@@ -28,7 +28,7 @@ class Dashboard extends Component {
     }
   }
 
-  componentDidMount() {
+  getUserEvents = () => {
     axios
       .get("https://api-msi-event-manager.now.sh/event/user/all")
       .then(res => {
@@ -41,6 +41,10 @@ class Dashboard extends Component {
           console.log(err.response.data);
         }
       });
+  };
+
+  componentDidMount() {
+    this.getUserEvents();
   }
 
   onChangeInput = e => {
@@ -70,15 +74,28 @@ class Dashboard extends Component {
       });
   };
 
+  onClickDeleteEvent = id => {
+    if (window.confirm("Are you sure, you want to delete this event?")) {
+      axios
+        .delete(`https://api-msi-event-manager.now.sh/event/${id}`)
+        .then(res => {
+          if (res.data) {
+            this.getUserEvents();
+          }
+        });
+    }
+  };
+
   onClickDelete = id => {
-    axios
-      .delete(`https://api-msi-event-manager.now.sh/image/home/${id}`)
-      .then(res => {
-        if (res.data) {
-          this.props.getHomeImages();
-          alert("deleted");
-        }
-      });
+    if (window.confirm("are you sure, you want to delete this image?")) {
+      axios
+        .delete(`https://api-msi-event-manager.now.sh/image/home/${id}`)
+        .then(res => {
+          if (res.data) {
+            this.props.getHomeImages();
+          }
+        });
+    }
   };
 
   render() {
@@ -117,8 +134,22 @@ class Dashboard extends Component {
                           >
                             View
                           </button>
-                          <button className="edit">&#9998;</button>
-                          <button className="delete">&times;</button>
+                          <button
+                            onClick={() => {
+                              this.props.history.push(
+                                `/event/edit/${event._id}`
+                              );
+                            }}
+                            className="edit"
+                          >
+                            &#9998;
+                          </button>
+                          <button
+                            onClick={() => this.onClickDeleteEvent(event._id)}
+                            className="delete"
+                          >
+                            &times;
+                          </button>
                         </div>
                       </div>
                     ))}
@@ -175,5 +206,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getHomeImages }
+  { getHomeImages, getAllEvents }
 )(withRouter(Dashboard));
