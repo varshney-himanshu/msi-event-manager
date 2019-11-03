@@ -10,6 +10,7 @@ class CreateEvent extends Component {
       venue: "",
       deadline: "",
       description: "",
+      date: "",
       errors: {},
       auth: {},
       dateNow: "",
@@ -49,7 +50,9 @@ class CreateEvent extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { id } = this.state.auth.user;
-    const { title, venue, description, deadline, img } = this.state;
+    const { date, title, venue, description, deadline, img } = this.state;
+
+    console.log(this.state);
 
     const data = new FormData(); // using FormData to send file to the server
     data.append("creator", id);
@@ -58,6 +61,7 @@ class CreateEvent extends Component {
     data.append("description", description);
     data.append("imgFile", img);
     data.append("deadline", deadline);
+    data.append("date", date);
     this.props.registerEvent(data, this.props.history);
   };
 
@@ -87,6 +91,15 @@ class CreateEvent extends Component {
             placeholder="Venue"
             value={this.state.venue}
             onChange={this.onChange}
+          />
+          <br />
+          <label>Date: </label>
+          <input
+            type="date"
+            name="date"
+            value={this.state.date}
+            onChange={this.onChange}
+            min={dateNow}
           />
           <br />
           <label>Deadline: </label>

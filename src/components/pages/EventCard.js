@@ -3,6 +3,7 @@ import Timer from "../Timer";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { getAllEvents } from "../../actions/dataActions";
+import { extractDateString } from "../../utils/utils";
 import axios from "axios";
 
 class EventCard extends Component {
@@ -104,6 +105,10 @@ class EventCard extends Component {
           </p>
           <p className="venue">
             <strong>Venue: </strong> {event.venue}
+          </p>
+          <p>
+            <strong>Date: </strong>
+            {extractDateString(event.date)}
           </p>
         </div>
         <div className="footer">
