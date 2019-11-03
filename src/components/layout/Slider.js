@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 
 class Slider extends Component {
   static defaultProps = {
-    images: null
+    images: []
   };
 
   render() {
@@ -19,11 +19,11 @@ class Slider extends Component {
               <img src={image.data.url} />
               <p
                 onClick={() => {
-                  this.props.history.push(`/event/${image.event}`);
+                  this.props.history.push(`/event/${image.event.id}`);
                 }}
                 className="legend"
               >
-                {image.msg}
+                {image.event.msg && image.event.msg}
               </p>
             </div>
           ))}

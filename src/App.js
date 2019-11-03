@@ -33,6 +33,7 @@ import isEmpty from "./validation/is-empty";
 import logo from "./logo.png";
 import AddNotice from "./components/pages/AddNotice";
 import EditEvent from "./components/pages/EditEvent";
+import AddHomeImage from "./components/pages/AddHomeImage";
 
 store.dispatch(getHomeImages());
 store.dispatch(getAllEvents());
@@ -108,6 +109,12 @@ class App extends Component {
                 />
               </Switch>
               <Route exact path="/dashboard" component={Dashboard} />
+              <Route
+                exact
+                path="/dashboard/home/image/add"
+                component={AddHomeImage}
+              />
+
               <Route exact path="/notice/add" component={AddNotice} />
 
               <Route exact path="/test" component={Test} />

@@ -14,7 +14,7 @@ class Dashboard extends Component {
     this.state = {
       eventsLoading: true,
       events: [],
-      image: null,
+
       event: "",
       homeimages: []
     };
@@ -46,33 +46,6 @@ class Dashboard extends Component {
   componentDidMount() {
     this.getUserEvents();
   }
-
-  onChangeInput = e => {
-    switch (e.target.name) {
-      case "image":
-        this.setState({ image: e.target.files[0] });
-        break;
-
-      default:
-        this.setState({ [e.target.name]: e.target.value });
-    }
-  };
-
-  onUpload = e => {
-    e.preventDefault();
-
-    const { image } = this.state;
-    let data = new FormData();
-    data.append("image", image);
-
-    axios //https://api-msi-event-manager.now.sh/image/home/add
-      .post("https://api-msi-event-manager.now.sh/image/home/add", data)
-      .then(res => {
-        if (res.data) {
-          this.props.getHomeImages();
-        }
-      });
-  };
 
   onClickDeleteEvent = id => {
     if (window.confirm("Are you sure, you want to delete this event?")) {
@@ -169,6 +142,13 @@ class Dashboard extends Component {
             <button onClick={() => this.props.history.push("/notice/add")}>
               Add Notice <strong>&#43;</strong>
             </button>
+            <button
+              onClick={() =>
+                this.props.history.push("/dashboard/home/image/add")
+              }
+            >
+              Add Home Image <strong>&#43;</strong>
+            </button>
           </div>
         </div>
 
@@ -190,10 +170,6 @@ class Dashboard extends Component {
               </div>
             ))}
           </div>
-          <form onSubmit={this.onUpload}>
-            <input type="file" name="image" onChange={this.onChangeInput} />
-            <button>upload</button>
-          </form>
         </div>
       </div>
     );

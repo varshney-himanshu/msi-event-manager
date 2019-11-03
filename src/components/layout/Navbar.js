@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 // import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Navbar.css";
 import logo from "../../logo.png";
+import HamburgerIcon from "./HamburgerIcon";
 
 class Navbar extends Component {
   constructor(props) {
@@ -95,7 +96,7 @@ class Navbar extends Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            &#9776;
+            <HamburgerIcon />
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
