@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Navbar.css";
+import logo from "../../logo.png";
 
 class Navbar extends Component {
   constructor(props) {
@@ -79,9 +80,12 @@ class Navbar extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand-lg">
-          <Link className="navbar-brand" to="/">
-            <strong>MSI Events</strong>
-          </Link>
+          <div className="navbar-brand">
+            <Link to="/">
+              <strong> MSI Events</strong>
+            </Link>
+          </div>
+
           <button
             className="navbar-toggler"
             type="button"
