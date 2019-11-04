@@ -35,6 +35,8 @@ import AddNotice from "./components/pages/AddNotice";
 import EditEvent from "./components/pages/EditEvent";
 import AddHomeImage from "./components/pages/AddHomeImage";
 
+import "./components/pages/Form.css";
+
 store.dispatch(getHomeImages());
 store.dispatch(getAllEvents());
 store.dispatch(getLatestNotice());

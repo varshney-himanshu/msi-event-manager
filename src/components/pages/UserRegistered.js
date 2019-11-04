@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import FileDownload from "js-file-download";
+import "./UserRegistered.css";
+import Loader from "../layout/Loader";
 
 class UserRegistered extends Component {
   constructor(props) {
@@ -58,31 +60,35 @@ class UserRegistered extends Component {
     const { loading, usersRegistered } = this.state;
 
     if (loading) {
-      return <div>loading....</div>;
+      return <Loader />;
     } else {
       return (
-        <div>
-          <table>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Enrollment No.</th>
-              <th>Institute</th>
-              <th>Course</th>
-              <th>Phone</th>
-            </tr>
-            {usersRegistered.map(profile => (
+        <div className="user-registered">
+          <div className="container">
+            <table>
               <tr>
-                <td>{profile.fullName}</td>
-                <td>{profile.email}</td>
-                <td>{profile.enrollment_id}</td>
-                <td>{profile.institute}</td>
-                <td>{profile.course}</td>
-                <td>{profile.phone}</td>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Enrollment No.</th>
+                <th>Institute</th>
+                <th>Course</th>
+                <th>Phone</th>
               </tr>
-            ))}
-          </table>
-          <button onClick={this.onClickDownload}>Download .csv</button>
+              {usersRegistered.map(profile => (
+                <tr>
+                  <td>{profile.fullName}</td>
+                  <td>{profile.email}</td>
+                  <td>{profile.enrollment_id}</td>
+                  <td>{profile.institute}</td>
+                  <td>{profile.course}</td>
+                  <td>{profile.phone}</td>
+                </tr>
+              ))}
+            </table>
+          </div>
+          <button className="export-as-csv" onClick={this.onClickDownload}>
+            Export as .csv
+          </button>
         </div>
       );
     }

@@ -1,6 +1,5 @@
 .timer {
-  margin-top: 10px;
-  width: 200px;
+  width: 20rem;
 }
 .timer span {
   border: 1px solid darkgray;

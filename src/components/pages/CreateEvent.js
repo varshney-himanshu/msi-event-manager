@@ -70,6 +70,7 @@ class CreateEvent extends Component {
     return (
       <div className="form">
         <form onSubmit={this.onSubmit}>
+          <h4 className="heading">Add Event</h4>
           <input
             type="text"
             name="title"
@@ -77,14 +78,12 @@ class CreateEvent extends Component {
             value={this.state.title}
             onChange={this.onChange}
           />
-          <br />
           <textarea
             name="description"
             placeholder="Description"
             value={this.state.description}
             onChange={this.onChange}
           />
-          <br />
           <input
             type="text"
             name="venue"
@@ -92,8 +91,7 @@ class CreateEvent extends Component {
             value={this.state.venue}
             onChange={this.onChange}
           />
-          <br />
-          <label>Date: </label>
+          <label>Date </label>
           <input
             type="date"
             name="date"
@@ -101,8 +99,7 @@ class CreateEvent extends Component {
             onChange={this.onChange}
             min={dateNow}
           />
-          <br />
-          <label>Deadline: </label>
+          <label>Deadline </label>
           <input
             type="date"
             name="deadline"
@@ -110,7 +107,6 @@ class CreateEvent extends Component {
             onChange={this.onChange}
             min={dateNow}
           />
-          <br />
           <input
             onChange={this.onChange}
             type="file"
@@ -118,7 +114,6 @@ class CreateEvent extends Component {
             placeholder="upload image for the event"
             required
           />
-          <br />
           <button>Submit</button>
         </form>
       </div>

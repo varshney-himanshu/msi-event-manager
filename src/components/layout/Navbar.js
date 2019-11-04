@@ -35,12 +35,12 @@ class Navbar extends Component {
     <>
       <li className="nav-item">
         <Link to="/login" className="nav-link">
-          <button className="login">Login</button>
+          <button className="login-btn">Login</button>
         </Link>
       </li>
       <li className="nav-item">
         <Link to="/register" className="nav-link">
-          <button className="register">Register</button>
+          <button className="register-btn">Register</button>
         </Link>
       </li>
     </>
@@ -56,7 +56,6 @@ class Navbar extends Component {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {" "}
           {state.auth.user.name}
         </button>
         <div className="dropdown-menu">

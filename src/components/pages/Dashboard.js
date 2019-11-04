@@ -6,6 +6,7 @@ import axios from "axios";
 import "./Dashboard.css";
 import { extractDateString } from "../../utils/utils";
 import loading from "../../loading.gif";
+import Loader from "../layout/Loader";
 
 class Dashboard extends Component {
   constructor() {
@@ -129,9 +130,7 @@ class Dashboard extends Component {
                   </div>
                 </>
               ) : (
-                <div className="loading">
-                  <img src={loading} />
-                </div>
+                <Loader />
               )}
             </div>
           </div>

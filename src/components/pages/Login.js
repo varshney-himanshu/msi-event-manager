@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import { withRouter } from "react-router";
-
-const logo = "";
+import "./Login.css";
+import logo from "../../logo.png";
 
 class Login extends Component {
   constructor() {
@@ -45,42 +45,40 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="">
-        <div className="">
-          <div className="">
+      <div className="login">
+        <div className="form">
+          <form onSubmit={this.onSubmit}>
             <img
               className="login-logo"
               rel="preload"
               src={logo}
               alt="MSI Logo"
             />
-            <h6>MSI Events - Login</h6>
-            <form className="form" onSubmit={this.onSubmit}>
-              <input
-                type="email"
-                name="email"
-                value={this.state.email}
-                placeholder="Email Address"
-                onChange={this.onChange}
-                required
-              />
-              {this.state.errors.email && this.state.errors.email}
-              <br />
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                placeholder="Password"
-                onChange={this.onChange}
-                required
-              />
-              {this.state.errors.password && this.state.errors.password}
-              <br />
-              <button type="submit" value="Login">
-                Login
-              </button>
-            </form>
-          </div>
+            <h4 className="heading">MSI Events - Login</h4>
+            <input
+              type="email"
+              name="email"
+              value={this.state.email}
+              placeholder="Email Address"
+              onChange={this.onChange}
+              required
+            />
+            {this.state.errors.email && this.state.errors.email}
+            <br />
+            <input
+              type="password"
+              name="password"
+              value={this.state.password}
+              placeholder="Password"
+              onChange={this.onChange}
+              required
+            />
+            {this.state.errors.password && this.state.errors.password}
+            <br />
+            <button type="submit" value="Login">
+              Login
+            </button>
+          </form>
         </div>
       </div>
     );

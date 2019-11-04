@@ -103,13 +103,15 @@ class EventCard extends Component {
             {des}
             {des.length >= 199 && <>....</>}
           </p>
-          <p className="venue">
-            <strong>Venue: </strong> {event.venue}
-          </p>
-          <p>
-            <strong>Date: </strong>
-            {extractDateString(event.date)}
-          </p>
+          <div style={{ display: "flex" }}>
+            <p className="venue">
+              <strong>Venue: </strong> {event.venue}
+            </p>
+            <p style={{ marginLeft: "auto" }}>
+              <strong>Date: </strong>
+              {extractDateString(event.date)}
+            </p>
+          </div>
         </div>
         <div className="footer">
           {deadlineEnded ? (

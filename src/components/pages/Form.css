@@ -1,0 +1,87 @@
+.form {
+  position: relative;
+  height: 95vh;
+  background: url("../../background.jpg");
+  background-size: cover;
+  background-attachment: top;
+}
+
+.form form {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40rem;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.685);
+  padding: 3rem 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.login-logo {
+  width: 10rem;
+}
+.form .heading {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+  color: rgb(73, 72, 72);
+}
+
+.form form input,
+.form form textarea {
+  border: none;
+  margin: 0.3rem 0;
+  color: rgb(73, 72, 72);
+  letter-spacing: 0.5px;
+  width: 100%;
+  padding: 0.3rem 1rem;
+  border-radius: 0.3rem;
+}
+
+.form form button {
+  border: 2px solid #e8f0fe;
+  margin: auto;
+  margin-top: 2rem;
+  background-color: rgb(72, 72, 72);
+  color: #e8f0fe;
+  padding: 0.5rem 1rem;
+  width: 60%;
+  font-weight: 500;
+  letter-spacing: 2px;
+  border-radius: 5px;
+}
+
+.form form textarea {
+  resize: none;
+}
+
+.form form label {
+  display: block;
+  text-align: left;
+  margin: 0;
+  padding: 0 0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 1.4rem;
+}
+
+.form form label + input {
+  margin-top: 0;
+}
+
+::-webkit-file-upload-button {
+  border: 2px solid #e8f0fe;
+  background: rgb(73, 72, 72);
+  color: white;
+  border-radius: 5px;
+  padding: 0.2rem 1rem;
+}
+
+::-webkit-file-upload-button:hover {
+  background: #e8f0fe;
+  color: rgb(73, 72, 72);
+  border: 2px solid rgb(73, 72, 72);
+  cursor: pointer;
+}

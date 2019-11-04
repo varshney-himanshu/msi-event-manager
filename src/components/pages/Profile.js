@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import "./Profile.css";
+import Loader from "../layout/Loader";
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -51,45 +54,46 @@ class Profile extends Component {
 
     return (
       <div>
-        {!loading ? (
-          !user.isProfileCreated ? (
-            <button
-              onClick={() => this.props.history.push("/user/profile/create")}
-            >
-              {" "}
-              Create Profile{" "}
-            </button>
+        <div className="profile" style={{ textAlign: "left" }}>
+          {!loading ? (
+            !user.isProfileCreated ? (
+              <button
+                onClick={() => this.props.history.push("/user/profile/create")}
+              >
+                Create Profile
+              </button>
+            ) : (
+              <>
+                <div>
+                  <strong>Name: </strong>
+                  {user.name}
+                </div>
+                <div>
+                  <strong>Email: </strong>
+                  {user.email}
+                </div>
+                <div>
+                  <strong>Enrollment ID: </strong>
+                  {profile.enrollment_id}
+                </div>
+                <div>
+                  <strong>Course: </strong>
+                  {profile.course}
+                </div>
+                <div>
+                  <strong>Institute: </strong>
+                  {profile.institute}
+                </div>
+                <div>
+                  <strong>Phone: </strong>
+                  {profile.phone}
+                </div>
+              </>
+            )
           ) : (
-            <div className="profile" style={{ textAlign: "left" }}>
-              <div>
-                <strong>Name: </strong>
-                {user.name}
-              </div>
-              <div>
-                <strong>Email: </strong>
-                {user.email}
-              </div>
-              <div>
-                <strong>Enrollment ID: </strong>
-                {profile.enrollment_id}
-              </div>
-              <div>
-                <strong>Course: </strong>
-                {profile.course}
-              </div>
-              <div>
-                <strong>Institute: </strong>
-                {profile.institute}
-              </div>
-              <div>
-                <strong>Phone: </strong>
-                {profile.phone}
-              </div>
-            </div>
-          )
-        ) : (
-          <div>loading...</div>
-        )}
+            <Loader />
+          )}
+        </div>
       </div>
     );
   }

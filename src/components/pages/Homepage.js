@@ -29,7 +29,7 @@ class Homepage extends Component {
     const { homeimages, notice, events } = this.state;
     console.log(homeimages);
     return (
-      <div>
+      <div className="homepage">
         <div className="row homepage-content">
           <div className="col-md-9 main-container">
             <Slider images={homeimages} />

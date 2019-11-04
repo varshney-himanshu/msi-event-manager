@@ -33,12 +33,14 @@ class AddNotice extends Component {
 
   render() {
     return (
-      <div>
+      <div className="form">
         <form onSubmit={this.onSubmit}>
+          <h4 className="heading">Add Notice</h4>
           <textarea
             name="text"
             value={this.state.text}
             onChange={this.onChange}
+            placeholder="Add short descriptive notice (Max Words: 250)"
           />
           <button>Submit</button>
         </form>

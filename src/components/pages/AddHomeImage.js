@@ -52,7 +52,7 @@ class AddHomeImage extends Component {
     return (
       <div className="form">
         <form onSubmit={this.onUpload}>
-          <input type="file" name="image" onChange={this.onChangeInput} />
+          <h4 className="heading">Add Home Image</h4>
           <br />
           <input
             type="text"
@@ -68,7 +68,8 @@ class AddHomeImage extends Component {
             placeholder="A short message for the event"
           />
           <br />
-          <button>upload</button>
+          <input type="file" name="image" onChange={this.onChangeInput} />
+          <button>Upload</button>
         </form>
       </div>
     );

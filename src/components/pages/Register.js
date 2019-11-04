@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import { withRouter } from "react-router";
-
-const logo = "";
+import logo from "../../logo.png";
 
 class Register extends Component {
   constructor() {
@@ -53,49 +52,56 @@ class Register extends Component {
   render() {
     return (
       <div className="register-page">
-        <img className="login-logo" rel="preload" src={logo} alt="MSI Logo" />
-        <h6>MSI Events - Register</h6>
-        <input
-          type="text"
-          name="name"
-          value={this.state.name}
-          placeholder="Full Name"
-          onChange={this.onChange}
-        />
-        {this.state.errors.name && this.state.errors.name}
-        <br />
-        <form className="form" onSubmit={this.onSubmit}>
-          <input
-            type="email"
-            name="email"
-            value={this.state.email}
-            placeholder="Email Address"
-            onChange={this.onChange}
-          />
-          {this.state.errors.email && this.state.errors.email}
+        <div className="form">
           <br />
-          <input
-            type="password"
-            name="password"
-            value={this.state.password}
-            placeholder="Password"
-            onChange={this.onChange}
-          />
-          {this.state.errors.password && this.state.errors.password}
-          <br />
-          <input
-            type="password"
-            name="password2"
-            value={this.state.password2}
-            placeholder="Confim Password"
-            onChange={this.onChange}
-          />
-          {this.state.errors.password2 && this.state.errors.password2}
-          <br />
-          <button type="submit" value="Register">
-            Register
-          </button>
-        </form>
+          <form onSubmit={this.onSubmit}>
+            <img
+              className="login-logo"
+              rel="preload"
+              src={logo}
+              alt="MSI Logo"
+            />
+            <h4 className="heading">MSI Events - Register</h4>
+            <input
+              type="text"
+              name="name"
+              value={this.state.name}
+              placeholder="Full Name"
+              onChange={this.onChange}
+            />
+            {this.state.errors.name && this.state.errors.name}
+            <input
+              type="email"
+              name="email"
+              value={this.state.email}
+              placeholder="Email Address"
+              onChange={this.onChange}
+            />
+            {this.state.errors.email && this.state.errors.email}
+            <br />
+            <input
+              type="password"
+              name="password"
+              value={this.state.password}
+              placeholder="Password"
+              onChange={this.onChange}
+            />
+            {this.state.errors.password && this.state.errors.password}
+            <br />
+            <input
+              type="password"
+              name="password2"
+              value={this.state.password2}
+              placeholder="Confim Password"
+              onChange={this.onChange}
+            />
+            {this.state.errors.password2 && this.state.errors.password2}
+            <br />
+            <button type="submit" value="Register">
+              Register
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

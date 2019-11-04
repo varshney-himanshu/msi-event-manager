@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import loader from "../../loading.gif";
 import "./Event.css";
+import Loader from "../layout/Loader";
 
 class Event extends Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class Event extends Component {
       auth: {},
       event: {},
       loading: true,
-      usersRegistered: []
+      usersRegistered: [],
+      isRegistered: false,
+      deadlineEnded: false
     };
   }
 
@@ -33,7 +36,16 @@ class Event extends Component {
       .get(`https://api-msi-event-manager.now.sh/event/${id}`)
       .then(res => {
         if (res.data) {
-          this.setState({ event: res.data, loading: false });
+          this.setState({ event: res.data, loading: false }, () => {
+            const { usersRegistered } = this.state.event;
+            const ifRegistered = usersRegistered.filter(
+              user => user === this.state.auth.user.id
+            );
+
+            if (ifRegistered.length > 0) {
+              this.setState({ isRegistered: true });
+            }
+          });
         }
       })
       .catch(err => {
@@ -45,44 +57,118 @@ class Event extends Component {
       });
   }
 
+  onClickRegister = () => {
+    const { user, isAuthenticated } = this.state.auth;
+    if (isAuthenticated) {
+      if (user.isProfileCreated) {
+        const { _id } = this.state.event;
+        const user_id = this.state.auth.user.id;
+        axios
+          .post(
+            `https://api-msi-event-manager.now.sh/event/${_id}/register-user`,
+            {
+              user: user_id
+            }
+          )
+          .then(res => {
+            if (res.data) {
+              this.setState({ isRegistered: true });
+            }
+          })
+          .catch(err => console.log(err));
+      } else {
+        alert("Please create your profile to register on an event.");
+        this.props.history.push("/user/profile");
+      }
+    } else {
+      this.props.history.push("/login");
+    }
+  };
+
+  endDeadline = () => {
+    this.setState({ deadlineEnded: true });
+  };
+
   render() {
-    const { event, loading, auth, usersRegistered } = this.state;
+    const {
+      event,
+      loading,
+      auth,
+      deadlineEnded,
+      isRegistered,
+      usersRegistered
+    } = this.state;
 
     if (loading) {
-      return (
-        <div className="event-loader">
-          <img src={loader} />
-        </div>
-      );
+      return <Loader />;
     } else {
       return (
-        <div>
-          <h1>{event.title}</h1>
-          <p>{event.description}</p>
-          <div>
-            <strong>Registration Deadline:</strong>{" "}
-            {extractDateString(event.deadline)}
-          </div>
-          <Timer deadline={event.deadline} />
-          <div>
-            <strong>Venue:</strong> {event.venue}
-          </div>
-          <div>{}</div>
-          <img width="50%" src={event.image.url} />
+        <div className="container">
+          <div className="event">
+            <h1>{event.title}</h1>
 
-          {auth.isAuthenticated && auth.user.role === "ADMIN" ? (
-            <button
-              onClick={() =>
-                this.props.history.push(
-                  `/event/${this.props.match.params.id}/registered`
-                )
-              }
-            >
-              Users Registered
-            </button>
-          ) : (
-            <></>
-          )}
+            <div className="event-image">
+              <img src={event.image.url} />
+            </div>
+            <p className="event-date">
+              <strong>Date: </strong> {extractDateString(event.date)}
+            </p>
+            <p>{event.description}</p>
+
+            <div className="event-deadline">
+              <strong>Registration Deadline:</strong>
+              <span className="deadline">
+                {extractDateString(event.deadline)}
+              </span>
+              <Timer deadline={event.deadline} endDeadline={this.endDeadline} />
+            </div>
+
+            <div className="venue">
+              <strong>Venue:</strong> {event.venue}
+            </div>
+            <div>{}</div>
+
+            <div className="footer">
+              {deadlineEnded ? (
+                <div>Registration Closed!</div>
+              ) : (
+                <>
+                  {auth.user.role === "STUDENT" ||
+                  auth.isAuthenticated === false ? (
+                    <>
+                      {isRegistered ? (
+                        <button className="event-register" disabled>
+                          Registered
+                        </button>
+                      ) : (
+                        <button
+                          className="event-register"
+                          onClick={this.onClickRegister}
+                        >
+                          Register
+                        </button>
+                      )}
+                    </>
+                  ) : null}
+                </>
+              )}
+
+              {auth.isAuthenticated && auth.user.role === "ADMIN" ? (
+                <button
+                  className="event-register"
+                  onClick={() =>
+                    this.props.history.push(
+                      `/event/${this.props.match.params.id}/registered`
+                    )
+                  }
+                >
+                  Users Registered
+                </button>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
         </div>
       );
     }
