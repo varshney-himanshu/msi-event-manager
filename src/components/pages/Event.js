@@ -123,12 +123,11 @@ class Event extends Component {
               <Timer deadline={event.deadline} endDeadline={this.endDeadline} />
             </div>
 
-            <div className="venue">
-              <strong>Venue:</strong> {event.venue}
-            </div>
-            <div>{}</div>
-
             <div className="footer">
+              <div className="venue">
+                <strong>Venue:</strong> {event.venue}
+              </div>
+
               {deadlineEnded ? (
                 <div>Registration Closed!</div>
               ) : (
