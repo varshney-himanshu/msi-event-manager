@@ -78,7 +78,7 @@ class Dashboard extends Component {
       <div className="dashboard">
         <div className="row">
           <div className="col col-12 col-md-10">
-            <h3>Your Events</h3>
+            <h2>Your Events</h2>
             <div className="dashboard-events">
               {!eventsLoading ? (
                 <>
@@ -152,7 +152,7 @@ class Dashboard extends Component {
         </div>
 
         <div className="home-images">
-          <h5 style={{ color: "gray" }}>Homepage Management</h5>
+          <h2 className="heading">Home Images/Events</h2>
           <hr></hr>
           <div className="images-thumbnails">
             {homeimages.map(image => (

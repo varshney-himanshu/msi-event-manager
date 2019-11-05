@@ -7,12 +7,11 @@
   box-shadow: 0 0 4px black;
   width: 95%;
   margin: auto;
-  position: relative;
-  height: 250px;
-  border-radius: 5px;
-  padding: 5px;
+  height: 25rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  overflow: scroll;
 }
-
 
 .row {
   width: 100%;
@@ -23,16 +22,17 @@
 }
 
 .dashboard-events-body {
-  max-height: 245px;
-  overflow-y: scroll;
+  max-height: 24.5rem;
 }
 
 .dashboard-event {
   color: black;
   border: 1px solid gray;
   text-align: left;
-  margin: 2px 5px;
-  border-radius: 4px;
+  margin: 0.2rem 0.5rem;
+  border-radius: 0.4rem;
+  position: relative;
+  width: 90rem;
 }
 
 .dashboard-event {
@@ -42,7 +42,7 @@
 .dashboard-event-title,
 .dashboard-event-venue,
 .dashboard-event-deadline {
-  padding: 3px 10px;
+  padding: 0.3rem 1rem;
   border-right: lightgray;
 }
 
@@ -52,12 +52,12 @@
 }
 
 .dashboard-event-btns {
-  padding-left: 50px;
+  padding-left: 2rem;
   width: 20%;
 }
 
 .view {
-  margin-right: 10px;
+  margin-right: 1rem;
   border-radius: 3px;
   border: 1px solid gray;
   color: gray;
@@ -71,16 +71,15 @@
 
 .edit,
 .delete {
-  margin: 3px 5px;
+  margin: 0.3rem 0.5rem;
   border-radius: 100%;
-  /* background: none; */
   border: none;
 }
 
 .delete {
   font-weight: bold;
-  font-size: 1.1em;
-  padding: 0 7px;
+  font-size: 1.8rem;
+  padding: 0 0.85rem;
 }
 
 .delete:hover {
@@ -102,7 +101,7 @@
 }
 
 .home-images {
-  margin-top: 20px;
+  margin-top: 2rem;
   border-top: 1px solid lightgray;
 }
 
@@ -110,18 +109,18 @@
   background: #4b8e8d;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.418);
   display: flex;
-  padding: 20px;
+  padding: 2rem;
   width: 100%;
   overflow-y: scroll;
 }
 
 .images-thumbnails img {
-  height: 150px;
+  height: 15rem;
   width: auto;
 }
 
 .thumbnail {
-  margin-right: 20px;
+  margin-right: 2rem;
   position: relative;
   transition: 0.3s;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.507);
@@ -138,22 +137,33 @@
   background: rgba(167, 23, 23, 0.705);
   color: white;
   border: none;
-  padding: 0px 7px;
+  padding: 0px 0.7rem;
 }
 
 .img-delete-btn:hover {
   background: rgba(167, 23, 23, 0.959);
 }
+
+.dashboard-btns {
+  margin-top: 2rem;
+}
+
 .dashboard-btns button {
   background: none;
   border: 1px solid gray;
   border-radius: 5px;
-  padding: 3px 6px;
+  padding: 0.3rem 0.6rem;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 }
 
 .dashboard-btns button:hover {
   background: gray;
   color: white;
+}
+
+@media only screen and (max-width: 500) {
+  .dashboard-event-btns {
+    padding-top: 4px;
+  }
 }
