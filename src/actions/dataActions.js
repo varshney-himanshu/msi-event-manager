@@ -4,6 +4,7 @@ import {
   SET_HOME_IMAGES,
   GET_ERRORS
 } from "./types";
+import { getCurrentUser } from "./authActions";
 import axios from "axios";
 // import { arrayBufferToBase64 } from "../utils/utils";
 
@@ -33,6 +34,7 @@ export const registerProfile = (data, history) => dispatch => {
     .post("https://api-msi-event-manager.now.sh/profile/register", data)
     .then(res => {
       if (res.data) {
+        dispatch(getCurrentUser());
         history.push("/user/profile");
       }
     })

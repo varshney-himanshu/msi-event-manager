@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerEvent } from "../../actions/dataActions";
 import Axios from "axios";
+import Loader from "../layout/Loader";
+import { withRouter } from "react-router-dom";
 
 class EditEvent extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ class EditEvent extends Component {
       venue: "",
       deadline: "",
       description: "",
+      date: "",
       errors: {},
       auth: {},
       img: null,
@@ -32,23 +35,36 @@ class EditEvent extends Component {
     const id = this.props.match.params.id;
     Axios.get(`https://api-msi-event-manager.now.sh/event/${id}`).then(res => {
       if (res.data) {
-        const { title, venue, deadline, image, description } = res.data;
+        const { date, title, venue, deadline, image, description } = res.data;
         this.setState(
           {
             title,
             venue,
             deadline,
             image,
-            description
+            description,
+            date
           },
           () => {
-            const { deadline } = this.state;
+            const { deadline, date } = this.state;
             const deadL = new Date(deadline);
-            const date = deadL.getDate();
-            const month = deadL.getMonth() + 1;
-            const year = deadL.getFullYear();
-            const defaultDeadline = `${year}-${month}-${date}`;
-            this.setState({ deadline: defaultDeadline, loading: false });
+            const eventDate = new Date(date);
+
+            const dateDl = deadL.getDate();
+            const monthDl = deadL.getMonth() + 1;
+            const yearDl = deadL.getFullYear();
+            const defaultDeadline = `${yearDl}-${monthDl}-${dateDl}`;
+
+            const dateE = eventDate.getDate();
+            const monthE = eventDate.getMonth() + 1;
+            const yearE = eventDate.getFullYear();
+            const defaultDate = `${yearE}-${monthE}-${dateE}`;
+
+            this.setState({
+              deadline: defaultDeadline,
+              date: defaultDate,
+              loading: false
+            });
           }
         );
       }
@@ -85,7 +101,15 @@ class EditEvent extends Component {
     Axios.put(
       `https://api-msi-event-manager.now.sh/event/${this.props.match.params.id}`,
       data
-    );
+    )
+      .then(res => {
+        if (res.data) {
+          this.props.history.push(`/event/${this.props.match.params.id}`);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -118,7 +142,7 @@ class EditEvent extends Component {
               onChange={this.onChange}
             />
             <br />
-            <label>Deadline: </label>
+            <label>Deadline</label>
             <input
               type="date"
               name="deadline"
@@ -126,6 +150,15 @@ class EditEvent extends Component {
               onChange={this.onChange}
             />
             <br />
+            <label>Date</label>
+            <input
+              type="date"
+              name="date"
+              value={this.state.date}
+              onChange={this.onChange}
+            />
+            <br />
+            <label>Add New Image</label>
             <input
               onChange={this.onChange}
               type="file"
@@ -138,7 +171,7 @@ class EditEvent extends Component {
         </div>
       );
     } else {
-      return <div>loading.....</div>;
+      return <Loader />;
     }
   }
 }
@@ -149,4 +182,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { registerEvent }
-)(EditEvent);
+)(withRouter(EditEvent));

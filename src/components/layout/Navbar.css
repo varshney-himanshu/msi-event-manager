@@ -36,6 +36,7 @@
 .navbar-brand a {
   color: darkslategray;
   font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .navbar-brand a:hover {
@@ -44,7 +45,8 @@
 }
 
 .login-btn,
-.register-btn {
+.register-btn,
+.dropdown-toggle {
   letter-spacing: 1px;
   background: none;
   border: none;
@@ -76,6 +78,8 @@
 
 .dropdown-toggle {
   font-size: 1.6rem;
+  background: darkslategray;
+  color: white;
 }
 
 .dropdown-menu {

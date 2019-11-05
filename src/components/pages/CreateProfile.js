@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerProfile } from "../../actions/dataActions";
+import { getCurrentUser } from "../../actions/authActions";
+import { withRouter } from "react-router-dom";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -39,7 +41,7 @@ class CreateProfile extends Component {
     e.preventDefault();
 
     const { name, auth, institute, phone, course, enrollment_id } = this.state;
-    const user = auth.user.id;
+    const user = auth.user._id;
     const email = auth.user.email;
     const data = {
       fullName: name,
@@ -50,8 +52,6 @@ class CreateProfile extends Component {
       course,
       institute
     };
-    //console.log(data);
-
     this.props.registerProfile(data, this.props.history);
   };
 
@@ -131,5 +131,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerProfile }
-)(CreateProfile);
+  { registerProfile, getCurrentUser }
+)(withRouter(CreateProfile));

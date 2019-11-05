@@ -57,38 +57,64 @@ class Profile extends Component {
         <div className="profile" style={{ textAlign: "left" }}>
           {!loading ? (
             !user.isProfileCreated ? (
-              <button
-                onClick={() => this.props.history.push("/user/profile/create")}
-              >
-                Create Profile
-              </button>
+              <div className="create-profile">
+                <p>
+                  You need to create a profile to participate in events. Your
+                  profile data is sent when you register on an event.
+                </p>
+                <button
+                  onClick={() =>
+                    this.props.history.push("/user/profile/create")
+                  }
+                >
+                  Create Profile
+                </button>
+              </div>
             ) : (
-              <>
-                <div>
-                  <strong>Name: </strong>
-                  {user.name}
+              <div className="profile container">
+                <div className="header">
+                  <div className="profile-picture"></div>
+                  <div className="username">
+                    {user.name}
+                    <span className="edit-profile">
+                      <button
+                        onClick={() => {
+                          this.props.history.push("profile/edit");
+                        }}
+                      >
+                        <i className="far fa-edit"></i>
+                      </button>
+                    </span>
+                  </div>
                 </div>
-                <div>
-                  <strong>Email: </strong>
-                  {user.email}
+                <div className="body">
+                  <div>
+                    <span className="field">Name - </span>
+                    <span className="value">{profile.fullName}</span>
+                  </div>
+                  <div>
+                    <span className="field">Email - </span>
+                    <span className="value">{user.email}</span>
+                  </div>
+
+                  <div>
+                    <span className="field">Phone - </span>
+                    <span className="value">{profile.phone}</span>
+                  </div>
+                  <div>
+                    <span className="field">Enrollment ID - </span>
+                    <span className="value"> {profile.enrollment_id}</span>
+                  </div>
+                  <div>
+                    <span className="field">Course - </span>
+                    <span className="value">{profile.course}</span>
+                  </div>
+                  <div>
+                    <span className="field">Institute - </span>
+                    <span className="value">{profile.institute}</span>
+                  </div>
                 </div>
-                <div>
-                  <strong>Enrollment ID: </strong>
-                  {profile.enrollment_id}
-                </div>
-                <div>
-                  <strong>Course: </strong>
-                  {profile.course}
-                </div>
-                <div>
-                  <strong>Institute: </strong>
-                  {profile.institute}
-                </div>
-                <div>
-                  <strong>Phone: </strong>
-                  {profile.phone}
-                </div>
-              </>
+              </div>
             )
           ) : (
             <Loader />

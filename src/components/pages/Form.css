@@ -85,3 +85,19 @@
   border: 2px solid rgb(73, 72, 72);
   cursor: pointer;
 }
+
+.form form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  color: gray;
+}
+
+.form form select option {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  color: black;
+}

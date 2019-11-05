@@ -106,7 +106,7 @@
 }
 
 .images-thumbnails {
-  background: #4b8e8d;
+  background: darkslategray;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.418);
   display: flex;
   padding: 2rem;

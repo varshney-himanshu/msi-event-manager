@@ -36,6 +36,7 @@ import EditEvent from "./components/pages/EditEvent";
 import AddHomeImage from "./components/pages/AddHomeImage";
 
 import "./components/pages/Form.css";
+import EditProfile from "./components/pages/EditProfile";
 
 store.dispatch(getHomeImages());
 store.dispatch(getAllEvents());
@@ -94,6 +95,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/user/profile" component={Profile} />
+              <Route exact path="/user/profile/edit" component={EditProfile} />
               <Route
                 exact
                 path="/user/profile/create"

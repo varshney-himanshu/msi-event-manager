@@ -2,7 +2,8 @@ import {
   CLEAR_DATA,
   SET_CURRENT_USER,
   GET_ERRORS,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  AUTHENTICATE
 } from "./types";
 import axios from "axios";
 
@@ -78,11 +79,23 @@ export const loginUser = (userData, history) => dispatch => {
     });
 };
 
-export const setCurrentUser = decoded => {
-  return {
-    type: SET_CURRENT_USER,
+export const setCurrentUser = decoded => dispatch => {
+  dispatch({
+    type: AUTHENTICATE,
     payload: decoded
-  };
+  });
+  dispatch(getCurrentUser());
+};
+
+export const getCurrentUser = () => dispatch => {
+  axios.get("https://api-msi-event-manager.now.sh/user").then(res => {
+    if (res.data) {
+      dispatch({
+        type: SET_CURRENT_USER,
+        payload: res.data
+      });
+    }
+  });
 };
 
 export const logoutUser = () => dispatch => {

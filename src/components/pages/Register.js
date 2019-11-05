@@ -66,7 +66,7 @@ class Register extends Component {
               type="text"
               name="name"
               value={this.state.name}
-              placeholder="Full Name"
+              placeholder="Username"
               onChange={this.onChange}
             />
             {this.state.errors.name && this.state.errors.name}
