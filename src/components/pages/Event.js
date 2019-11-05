@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { arrayBufferToBase64, extractDateString } from "../../utils/utils";
+import { extractDateString } from "../../utils/utils";
 import Timer from "../Timer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import loader from "../../loading.gif";
 import "./Event.css";
 import Loader from "../layout/Loader";
 

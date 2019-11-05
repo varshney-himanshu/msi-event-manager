@@ -2,11 +2,10 @@ import {
   SET_ALL_EVENTS,
   SET_NOTICE,
   SET_HOME_IMAGES,
-  GET_ERRORS
+  GET_ERRORS,
+  UPDATE_ISPROFILECREATED
 } from "./types";
-import { getCurrentUser } from "./authActions";
 import axios from "axios";
-// import { arrayBufferToBase64 } from "../utils/utils";
 
 export const getAllEvents = () => dispatch => {
   axios
@@ -34,7 +33,7 @@ export const registerProfile = (data, history) => dispatch => {
     .post("https://api-msi-event-manager.now.sh/profile/register", data)
     .then(res => {
       if (res.data) {
-        dispatch(getCurrentUser());
+        dispatch(updateIsProfileCreate(true));
         history.push("/user/profile");
       }
     })
@@ -112,4 +111,11 @@ export const getLatestNotice = () => dispatch => {
         console.log(err);
       }
     });
+};
+
+export const updateIsProfileCreate = data => dispatch => {
+  dispatch({
+    type: UPDATE_ISPROFILECREATED,
+    payload: data
+  });
 };

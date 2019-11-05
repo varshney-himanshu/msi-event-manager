@@ -81,20 +81,8 @@ export const loginUser = (userData, history) => dispatch => {
 
 export const setCurrentUser = decoded => dispatch => {
   dispatch({
-    type: AUTHENTICATE,
+    type: SET_CURRENT_USER,
     payload: decoded
-  });
-  dispatch(getCurrentUser());
-};
-
-export const getCurrentUser = () => dispatch => {
-  axios.get("https://api-msi-event-manager.now.sh/user").then(res => {
-    if (res.data) {
-      dispatch({
-        type: SET_CURRENT_USER,
-        payload: res.data
-      });
-    }
   });
 };
 

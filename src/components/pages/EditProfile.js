@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerProfile } from "../../actions/dataActions";
-import { getCurrentUser } from "../../actions/authActions";
+// import { getCurrentUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
 import Axios from "axios";
 import Loader from "../layout/Loader";
@@ -177,5 +177,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerProfile, getCurrentUser }
+  { registerProfile }
 )(withRouter(EditProfile));
