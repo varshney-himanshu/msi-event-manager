@@ -7,11 +7,12 @@
 .carousel .slide {
   background: darkslategray;
   /* box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.637); */
-
+  
   border-radius: 0.4rem;
 }
 
 .carousel img {
+  
   height: 60vh;
   width: auto !important;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.637);
