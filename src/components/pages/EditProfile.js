@@ -67,7 +67,7 @@ class EditProfile extends Component {
     e.preventDefault();
 
     const { name, auth, institute, phone, course, enrollment_id } = this.state;
-    const user = auth.user._id;
+    const user = auth.user.id;
     const email = auth.user.email;
     const data = {
       fullName: name,
