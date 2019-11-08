@@ -101,7 +101,16 @@ class Dashboard extends Component {
     const { events, auth, eventsLoading, homeimages } = this.state;
     return (
       <div className="dashboard">
-        <h1 className="heading">Dashboard</h1>
+        <h1 className="heading">
+          Dashboard{" "}
+          {auth.user.role === "ADMIN" ? (
+            <span>(Admin)</span>
+          ) : auth.user.role === "SUPER_ADMIN" ? (
+            <span>(Super Admin)</span>
+          ) : (
+            <></>
+          )}
+        </h1>
 
         <div className="row">
           <div className="col col-12 col-md-10">
