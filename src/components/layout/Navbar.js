@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Navbar.css";
-import logo from "../../logo.png";
 import HamburgerIcon from "./HamburgerIcon";
 
 class Navbar extends Component {
@@ -59,15 +55,20 @@ class Navbar extends Component {
           {state.auth.user.name}
         </button>
         <div className="dropdown-menu">
-          {state.auth.user.role === "ADMIN" ? (
+          {state.auth.user.role === "ADMIN" ||
+          state.auth.user.role === "SUPER_ADMIN" ? (
             <Link className="dropdown-item" to="/dashboard">
               Dashboard
             </Link>
-          ) : (
+          ) : ( <></> )}
+
+
+          {state.auth.user.role!=="SUPER_ADMIN" ?
             <Link className="dropdown-item" to="/user/profile">
               Profile
-            </Link>
-          )}
+            </Link> : <></>
+          }
+
           <button onClick={this.onClickLogout} className="dropdown-item">
             Logout
           </button>

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { getHomeImages, getAllEvents } from "../../actions/dataActions";
 import axios from "axios";
 import "./Dashboard.css";
 import { extractDateString } from "../../utils/utils";
-import loading from "../../loading.gif";
 import Loader from "../layout/Loader";
 
 class Dashboard extends Component {
@@ -15,7 +14,6 @@ class Dashboard extends Component {
     this.state = {
       eventsLoading: true,
       events: [],
-
       event: "",
       homeimages: []
     };
@@ -44,8 +42,33 @@ class Dashboard extends Component {
       });
   };
 
+  getAllEventsDashboard = () => {
+    axios
+      .get("https://api-msi-event-manager.now.sh/event/all")
+      .then(res => {
+        if (res.data) {
+          this.setState({ events: res.data, eventsLoading: false });
+        }
+      })
+      .catch(err => {
+        if (err.response) {
+          console.log(err.response.data);
+        }
+      });
+  };
+
   componentDidMount() {
-    this.getUserEvents();
+    const { user } = this.props.auth;
+
+    if (user.role !== "SUPER_ADMIN" && user.role !== "ADMIN") {
+      this.props.history.push("/");
+    }
+
+    if (user.role === "SUPER_ADMIN") {
+      this.getAllEventsDashboard();
+    } else if (user.role === "ADMIN") {
+      this.getUserEvents();
+    }
   }
 
   onClickDeleteEvent = id => {

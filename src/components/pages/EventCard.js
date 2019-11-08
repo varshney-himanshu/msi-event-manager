@@ -120,7 +120,7 @@ class EventCard extends Component {
             <>
               <Timer endDeadline={this.endDeadline} deadline={event.deadline} />
 
-              {auth.user.role === "STUDENT" ||
+              {auth.user.role === "STUDENT" || auth.user.role === "ADMIN"||
               auth.isAuthenticated === false ? (
                 <>
                   {isRegistered ? (
