@@ -15,14 +15,16 @@ class Dashboard extends Component {
       eventsLoading: true,
       events: [],
       event: "",
-      homeimages: []
+      homeimages: [],
+      auth: {}
     };
   }
 
   static getDerivedStateFromProps(props) {
-    if (props.homeimages) {
+    if (props.auth) {
       return {
-        homeimages: props.homeimages
+        homeimages: props.homeimages,
+        auth: props.auth
       };
     }
   }
@@ -96,12 +98,14 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { events, eventsLoading, homeimages } = this.state;
+    const { events, auth, eventsLoading, homeimages } = this.state;
     return (
       <div className="dashboard">
+        <h1 className="heading">Dashboard</h1>
+
         <div className="row">
           <div className="col col-12 col-md-10">
-            <h2>Your Events</h2>
+            <h2 className="heading">Your Events</h2>
             <div className="dashboard-events">
               {!eventsLoading ? (
                 <>
@@ -141,12 +145,16 @@ class Dashboard extends Component {
                           >
                             &#9998;
                           </button>
-                          <button
-                            onClick={() => this.onClickDeleteEvent(event._id)}
-                            className="delete"
-                          >
-                            &times;
-                          </button>
+                          {auth.user.role === "SUPER_ADMIN" ? (
+                            <button
+                              onClick={() => this.onClickDeleteEvent(event._id)}
+                              className="delete"
+                            >
+                              &times;
+                            </button>
+                          ) : (
+                            <></>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -161,38 +169,49 @@ class Dashboard extends Component {
             <button onClick={() => this.props.history.push("/event/create")}>
               Add Event <strong>&#43;</strong>
             </button>
-            <button onClick={() => this.props.history.push("/notice/add")}>
-              Add Notice <strong>&#43;</strong>
-            </button>
-            <button
-              onClick={() =>
-                this.props.history.push("/dashboard/home/image/add")
-              }
-            >
-              Add Home Image <strong>&#43;</strong>
-            </button>
+
+            {auth.user.role === "SUPER_ADMIN" ? (
+              <>
+                <button onClick={() => this.props.history.push("/notice/add")}>
+                  Add Notice <strong>&#43;</strong>
+                </button>
+                <button
+                  onClick={() =>
+                    this.props.history.push("/dashboard/home/image/add")
+                  }
+                >
+                  Add Home Image <strong>&#43;</strong>
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
 
-        <div className="home-images">
-          <h2 className="heading">Home Images/Events</h2>
-          <hr></hr>
-          <div className="images-thumbnails">
-            {homeimages.map(image => (
-              <div key={image._id} className="thumbnail">
-                <button
-                  onClick={() => {
-                    this.onClickDelete(image._id);
-                  }}
-                  className="img-delete-btn"
-                >
-                  &#x292B;
-                </button>
-                <img src={image.data.url} />
-              </div>
-            ))}
+        {auth.user.role === "SUPER_ADMIN" ? (
+          <div className="home-images">
+            <h2 className="heading">Home Images/Events</h2>
+            <hr></hr>
+            <div className="images-thumbnails">
+              {homeimages.map(image => (
+                <div key={image._id} className="thumbnail">
+                  <button
+                    onClick={() => {
+                      this.onClickDelete(image._id);
+                    }}
+                    className="img-delete-btn"
+                  >
+                    &#x292B;
+                  </button>
+                  <img src={image.data.url} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }

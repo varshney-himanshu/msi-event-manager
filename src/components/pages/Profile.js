@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "./Profile.css";
 import Loader from "../layout/Loader";
+import { extractDateString } from "../../utils/utils";
 
 class Profile extends Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class Profile extends Component {
       auth: {},
       profile: {},
       user: {},
-      loading: true
+      loading: true,
+      events: [],
+      isEventsLoading: true
     };
   }
 
@@ -31,26 +34,38 @@ class Profile extends Component {
     }
 
     axios
-      .get("https://api-msi-event-manager.now.sh/profile")
-      .then(res => {
-        if (res.data) {
-          this.setState({ profile: res.data });
-        }
-      })
-      .catch(err => console.log(err));
-
-    axios
       .get("https://api-msi-event-manager.now.sh/user")
       .then(res => {
         if (res.data) {
-          this.setState({ loading: false, user: res.data });
+          axios
+            .get("https://api-msi-event-manager.now.sh/profile")
+            .then(res => {
+              if (res.data) {
+                this.setState({ profile: res.data, loading: false });
+                const profile = res.data;
+                axios
+                  .post("https://api-msi-event-manager.now.sh/event/ids", {
+                    registered: profile.registered
+                  })
+                  .then(res => {
+                    if (res.data) {
+                      this.setState({
+                        isEventsLoading: false,
+                        events: res.data
+                      });
+                    }
+                  });
+              }
+            })
+            .catch(err => console.log(err));
+          this.setState({ user: res.data });
         }
       })
       .catch(err => console.log(err));
   }
 
   render() {
-    const { loading, user, profile } = this.state;
+    const { loading, user, profile, isEventsLoading, events } = this.state;
 
     return (
       <div>
@@ -75,7 +90,7 @@ class Profile extends Component {
                 <div className="header">
                   <div className="profile-picture"></div>
                   <div className="username">
-                    {user.name}
+                    {user.name} <span className="role">({user.role})</span>
                     <span className="edit-profile">
                       <button
                         onClick={() => {
@@ -113,6 +128,48 @@ class Profile extends Component {
                     <span className="field">Institute - </span>
                     <span className="value">{profile.institute}</span>
                   </div>
+                </div>
+
+                <div className="profile-events">
+                  {isEventsLoading ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      <h2>Your Registered Events</h2>
+                      <div className="profile-events-table">
+                        {events.map((event, index) => (
+                          <div
+                            key={event._id + index}
+                            className="profile-event row"
+                          >
+                            <div className="col col-12 col-sm-6 col-lg-5">
+                              <span>{event.title}</span>
+                            </div>
+
+                            <div className="col col-12 col-sm-6 col-lg-4">
+                              <span>Venue: </span>
+                              {event.venue}
+                            </div>
+                            <div className="col col-12 col-sm-6 col-lg-2">
+                              <span>Date: </span>
+                              {extractDateString(event.date)}
+                            </div>
+                            <div className="col col-12 col-sm-6 col-lg-1">
+                              <button
+                                onClick={() => {
+                                  this.props.history.push(
+                                    `/event/${event._id}`
+                                  );
+                                }}
+                              >
+                                View
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             )

@@ -3,6 +3,14 @@
   transition: 0.3s;
 }
 
+.dashboard .heading {
+  text-align: right;
+  padding: 0.5rem 5rem;
+  font-weight: bold;
+  color: darkslategray;
+  border-bottom: 1px solid lightgray;
+}
+
 .dashboard-events {
   box-shadow: 0 0 4px black;
   width: 95%;
@@ -22,28 +30,35 @@
 }
 
 .dashboard-events-body {
-  max-height: 24.5rem;
+  max-height: 40rem;
 }
 
+.dashboard-events-heading {
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: darkslategray;
+}
 .dashboard-event {
-  color: black;
+  background: white;
+  color: rgb(0, 0, 0);
   border: 1px solid gray;
   text-align: left;
-  margin: 0.2rem 0.5rem;
+  margin: auto;
+  margin-top: 0.2rem;
+  margin-bottom: 0.6rem;
   border-radius: 0.4rem;
   position: relative;
   width: 90rem;
-}
-
-.dashboard-event {
+  transition: all 0.3s;
   display: flex;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .dashboard-event-title,
 .dashboard-event-venue,
 .dashboard-event-deadline {
   padding: 0.3rem 1rem;
-  border-right: lightgray;
+  border-right: 1px solid lightgray;
 }
 
 .dashboard-event-title,
@@ -59,13 +74,13 @@
 .view {
   margin-right: 1rem;
   border-radius: 3px;
-  border: 1px solid gray;
-  color: gray;
+  border: 1px solid darkslategray;
+  color: darkslategray;
   background: none;
 }
 
 .view:hover {
-  background: gray;
+  background: darkslategray;
   color: white;
 }
 

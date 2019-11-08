@@ -60,14 +60,17 @@ class Navbar extends Component {
             <Link className="dropdown-item" to="/dashboard">
               Dashboard
             </Link>
-          ) : ( <></> )}
+          ) : (
+            <></>
+          )}
 
-
-          {state.auth.user.role!=="SUPER_ADMIN" ?
+          {state.auth.user.role !== "SUPER_ADMIN" ? (
             <Link className="dropdown-item" to="/user/profile">
               Profile
-            </Link> : <></>
-          }
+            </Link>
+          ) : (
+            <></>
+          )}
 
           <button onClick={this.onClickLogout} className="dropdown-item">
             Logout

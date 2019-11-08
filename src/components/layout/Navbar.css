@@ -33,6 +33,12 @@
   font-size: 2.2rem;
 }
 
+.navbar-role {
+  color: darkgoldenrod;
+  margin-right: 40px;
+  margin-top: 5px;
+}
+
 .navbar-brand a {
   color: darkslategray;
   font-weight: bold;

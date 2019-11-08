@@ -72,6 +72,19 @@ class EventCard extends Component {
           .then(res => {
             if (res.data) {
               this.setState({ isRegistered: true });
+              axios
+                .put(
+                  "https://api-msi-event-manager.now.sh/profile/add-registered-event",
+                  { eventId: _id }
+                )
+                .then(res => {
+                  if (res.data) {
+                    console.log("registered!");
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                });
             }
           })
           .catch(err => console.log(err));
@@ -120,7 +133,8 @@ class EventCard extends Component {
             <>
               <Timer endDeadline={this.endDeadline} deadline={event.deadline} />
 
-              {auth.user.role === "STUDENT" || auth.user.role === "ADMIN"||
+              {auth.user.role === "STUDENT" ||
+              auth.user.role === "ADMIN" ||
               auth.isAuthenticated === false ? (
                 <>
                   {isRegistered ? (
