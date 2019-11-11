@@ -37,6 +37,7 @@ import AddHomeImage from "./components/pages/AddHomeImage";
 
 import "./components/pages/Form.css";
 import EditProfile from "./components/pages/EditProfile";
+import Users from "./components/pages/Users";
 
 store.dispatch(getHomeImages());
 store.dispatch(getAllEvents());
@@ -113,6 +114,7 @@ class App extends Component {
                 />
               </Switch>
               <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/dashboard/users" component={Users} />
               <Route
                 exact
                 path="/dashboard/home/image/add"

@@ -3,7 +3,8 @@ import {
   SET_NOTICE,
   SET_HOME_IMAGES,
   GET_ERRORS,
-  UPDATE_ISPROFILECREATED
+  UPDATE_ISPROFILECREATED,
+  SET_USERS
 } from "./types";
 import axios from "axios";
 
@@ -118,4 +119,25 @@ export const updateIsProfileCreate = data => dispatch => {
     type: UPDATE_ISPROFILECREATED,
     payload: data
   });
+};
+
+export const getAllUsers = () => dispatch => {
+  axios
+    .get("https://api-msi-event-manager.now.sh/user/all")
+    .then(res => {
+      dispatch({
+        type: SET_USERS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      if (err.response) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        });
+      } else {
+        console.log(err);
+      }
+    });
 };
