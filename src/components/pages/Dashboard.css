@@ -1,5 +1,4 @@
 .dashboard {
-  padding-top: 30px;
   transition: 0.3s;
 }
 
@@ -71,24 +70,12 @@
   width: 20%;
 }
 
-.view {
-  margin-right: 1rem;
-  border-radius: 3px;
-  border: 1px solid darkslategray;
-  color: darkslategray;
-  background: none;
-}
-
-.view:hover {
-  background: darkslategray;
-  color: white;
-}
-
 .edit,
 .delete {
   margin: 0.3rem 0.5rem;
   border-radius: 100%;
-  border: none;
+  border: 1px solid darkslategray;
+  transition: 0.2s;
 }
 
 .delete {
@@ -118,6 +105,7 @@
 .home-images {
   margin-top: 2rem;
   border-top: 1px solid lightgray;
+  transition: all 0.3s;
 }
 
 .images-thumbnails {
@@ -164,17 +152,9 @@
 }
 
 .dashboard-btns button {
-  background: none;
-  border: 1px solid gray;
-  border-radius: 5px;
   padding: 0.3rem 0.6rem;
   width: 100%;
   margin-bottom: 0.5rem;
-}
-
-.dashboard-btns button:hover {
-  background: gray;
-  color: white;
 }
 
 @media only screen and (max-width: 500) {

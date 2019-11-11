@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import "./App.css";
 import store from "./store";
@@ -70,9 +65,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 2000);
+    store.subscribe(() => {
+      this.setState({
+        loading: !store.getState().data.imagesLoaded
+      });
+    });
   }
 
   render() {

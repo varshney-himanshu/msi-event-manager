@@ -57,7 +57,8 @@ class UserCard extends Component {
     )
       .then(res => {
         if (res.data) {
-          console.log(res.data);
+          this.onClickClose();
+          this.props.getAllUsers();
         }
       })
       .catch(err => console.log(err));
@@ -67,6 +68,20 @@ class UserCard extends Component {
     const id = "#" + "form-" + this.props.user._id.toString();
     const form = document.querySelector(id);
     form.classList.remove("users__card-show-form");
+  };
+
+  onClickDelete = () => {
+    const { _id } = this.props.user;
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      Axios.delete(`https://api-msi-event-manager.now.sh/user/${_id}`).then(
+        res => {
+          if (res.data) {
+            this.props.getAllUsers();
+            window.alert("deleted");
+          }
+        }
+      );
+    }
   };
 
   render() {
@@ -85,17 +100,22 @@ class UserCard extends Component {
             <span className="key">Role:</span> {user.role}
           </div>
           <div className="col col-12 col-sm-6 col-md-4 col-lg-2 card_btns">
-            <button
-              className="users__card-toggle-btn"
-              onClick={this.onClickToggle}
-            >
+            <button className="button-dark" onClick={this.onClickToggle}>
               Change Role
+            </button>
+            <button
+              onClick={this.onClickDelete}
+              title="Delete User"
+              className="button-dark-outline"
+            >
+              x
             </button>
             <form id={"form-" + user._id.toString()} onSubmit={this.onSubmit}>
               <button
                 className="form-close"
                 type="button"
                 onClick={this.onClickClose}
+                title="close"
               >
                 x
               </button>
@@ -123,6 +143,7 @@ class UserCard extends Component {
                   <input
                     type="password"
                     name="password"
+                    className="form-control"
                     placeholder="Verify Password"
                     value={this.state.password}
                     onChange={this.onChange}
@@ -130,14 +151,16 @@ class UserCard extends Component {
                   <button
                     type="button"
                     onClick={this.onClickVerify}
-                    className="form-btn"
+                    className="button-dark"
                   >
                     Verify
                   </button>
                 </>
               ) : (
                 <>
-                  <button type="submit">Submit</button>
+                  <button type="submit" className="button-dark">
+                    Submit
+                  </button>
                 </>
               )}
             </form>

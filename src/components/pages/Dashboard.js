@@ -140,7 +140,7 @@ class Dashboard extends Component {
                                 "/event/" + event._id.toString()
                               )
                             }
-                            className="view"
+                            className="button-dark-outline"
                           >
                             View
                           </button>
@@ -175,16 +175,29 @@ class Dashboard extends Component {
             </div>
           </div>
           <div className="col col-12 col-md-2 dashboard-btns ">
-            <button onClick={() => this.props.history.push("/event/create")}>
+            <button
+              className="button-dark"
+              onClick={() => this.props.history.push("/event/create")}
+            >
               Add Event <strong>&#43;</strong>
             </button>
 
             {auth.user.role === "SUPER_ADMIN" ? (
               <>
-                <button onClick={() => this.props.history.push("/notice/add")}>
+                <button
+                  className="button-dark"
+                  onClick={() => this.props.history.push("/notice/add")}
+                >
                   Add Notice <strong>&#43;</strong>
                 </button>
                 <button
+                  className="button-dark"
+                  onClick={() => this.props.history.push("/dashboard/users")}
+                >
+                  Handle Users
+                </button>
+                <button
+                  className="button-dark"
                   onClick={() =>
                     this.props.history.push("/dashboard/home/image/add")
                   }

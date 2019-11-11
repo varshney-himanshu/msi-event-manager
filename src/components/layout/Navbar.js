@@ -31,12 +31,12 @@ class Navbar extends Component {
     <>
       <li className="nav-item">
         <Link to="/login" className="nav-link">
-          <button className="login-btn">Login</button>
+          <button className="button-dark">Login</button>
         </Link>
       </li>
       <li className="nav-item">
         <Link to="/register" className="nav-link">
-          <button className="register-btn">Register</button>
+          <button className="button-dark-outline">Register</button>
         </Link>
       </li>
     </>
@@ -47,7 +47,7 @@ class Navbar extends Component {
       <div className="btn-group dropleft">
         <button
           type="button"
-          className="btn btn-secondary dropdown-toggle"
+          className="btn btn-secondary dropdown-toggle button-dark"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
