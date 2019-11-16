@@ -1,7 +1,12 @@
+.user-registered .container {
+  overflow: scroll;
+  margin-top: 5rem;
+}
+
 .user-registered table {
   width: 100%;
-  margin-top: 5rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.247);
+  overflow: scroll !important;
 }
 
 .user-registered table td {
@@ -19,7 +24,7 @@ th {
   letter-spacing: 1px;
   color: white;
   border: 1px solid white;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .export-as-csv {

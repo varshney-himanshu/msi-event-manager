@@ -79,7 +79,7 @@ class Dashboard extends Component {
         .delete(`https://api-msi-event-manager.now.sh/event/${id}`)
         .then(res => {
           if (res.data) {
-            this.getUserEvents();
+            this.getAllEventsDashboard();
           }
         });
     }
