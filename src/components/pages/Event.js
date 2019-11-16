@@ -15,7 +15,6 @@ class Event extends Component {
       auth: {},
       event: {},
       loading: true,
-      usersRegistered: [],
       isRegistered: false,
       deadlineEnded: false
     };
@@ -31,18 +30,27 @@ class Event extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id;
+    const user = this.props.auth;
+
     axios
       .get(`https://api-msi-event-manager.now.sh/event/${id}`)
       .then(res => {
         if (res.data) {
           this.setState({ event: res.data, loading: false }, () => {
-            const { usersRegistered } = this.state.event;
-            const ifRegistered = usersRegistered.filter(
-              user => user === this.state.auth.user.id
-            );
+            if (user.isAuthenticated) {
+              if (res.data.type === "MULTIPLE") {
+              } else {
+                const { usersRegistered } = this.state.event;
+                console.log(usersRegistered);
 
-            if (ifRegistered.length > 0) {
-              this.setState({ isRegistered: true });
+                const ifRegistered = usersRegistered.filter(
+                  user => user.user.toString() === this.state.auth.user.id
+                );
+
+                if (ifRegistered.length > 0) {
+                  this.setState({ isRegistered: true });
+                }
+              }
             }
           });
         }
@@ -62,32 +70,37 @@ class Event extends Component {
       if (user.isProfileCreated) {
         const { _id } = this.state.event;
         const user_id = this.state.auth.user.id;
+
         axios
-          .post(
-            `https://api-msi-event-manager.now.sh/event/${_id}/register-user`,
-            {
-              user: user_id
-            }
-          )
+          .get(`https://api-msi-event-manager.now.sh/profile/${user_id}`)
           .then(res => {
             if (res.data) {
-              this.setState({ isRegistered: true });
               axios
-                .put(
-                  "https://api-msi-event-manager.now.sh/profile/add-registered-event",
-                  { eventId: _id }
+                .post(
+                  `https://api-msi-event-manager.now.sh/event/${_id}/register-user`,
+                  { user: res.data }
                 )
                 .then(res => {
                   if (res.data) {
-                    console.log("registered!");
+                    this.setState({ isRegistered: true });
+                    axios
+                      .put(
+                        "https://api-msi-event-manager.now.sh/profile/add-registered-event",
+                        { eventId: _id }
+                      )
+                      .then(res => {
+                        if (res.data) {
+                          console.log("registered!");
+                        }
+                      })
+                      .catch(err => {
+                        console.log(err);
+                      });
                   }
                 })
-                .catch(err => {
-                  console.log(err);
-                });
+                .catch(err => console.log(err));
             }
-          })
-          .catch(err => console.log(err));
+          });
       } else {
         alert("Please create your profile to register on an event.");
         this.props.history.push("/user/profile");
@@ -102,14 +115,7 @@ class Event extends Component {
   };
 
   render() {
-    const {
-      event,
-      loading,
-      auth,
-      deadlineEnded,
-      isRegistered,
-      usersRegistered
-    } = this.state;
+    const { event, loading, auth, deadlineEnded, isRegistered } = this.state;
 
     if (loading) {
       return <Loader />;
@@ -118,7 +124,7 @@ class Event extends Component {
         <div className="container">
           <div className="event">
             <h1>{event.title}</h1>
-
+            <h5>{event.type === "MULTIPLE" ? "Team Event" : "Single Event"}</h5>
             <div className="event-image">
               <img src={event.image.url} />
             </div>
@@ -165,7 +171,7 @@ class Event extends Component {
                 </>
               )}
 
-              {auth.isAuthenticated && auth.user.role === "ADMIN" ? (
+              {auth.isAuthenticated && auth.user.role === "SUPER_ADMIN" ? (
                 <button
                   className="event-register"
                   onClick={() =>
@@ -190,7 +196,4 @@ class Event extends Component {
 const mapStateToProps = state => ({
   auth: state.auth
 });
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(Event));
+export default connect(mapStateToProps, null)(withRouter(Event));

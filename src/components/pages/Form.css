@@ -107,3 +107,14 @@
   border-radius: 5px;
   color: black;
 }
+
+.form__radio {
+  text-align: left;
+  margin: 0.5rem;
+  margin-top: 0;
+}
+
+.radio {
+  width: fit-content !important;
+  margin-left: 1rem !important;
+}

@@ -11,10 +11,12 @@ class CreateEvent extends Component {
       deadline: "",
       description: "",
       date: "",
+      type: "SINGLE",
       errors: {},
       auth: {},
       dateNow: "",
-      img: null
+      img: null,
+      members: null
     };
   }
 
@@ -50,7 +52,16 @@ class CreateEvent extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { id } = this.state.auth.user;
-    const { date, title, venue, description, deadline, img } = this.state;
+    const {
+      date,
+      title,
+      venue,
+      description,
+      deadline,
+      img,
+      type,
+      members
+    } = this.state;
 
     console.log(this.state);
 
@@ -62,11 +73,17 @@ class CreateEvent extends Component {
     data.append("imgFile", img);
     data.append("deadline", deadline);
     data.append("date", date);
+    data.append("type", type);
+
+    if (type === "MULTIPLE") {
+      data.append("members", members);
+    }
+
     this.props.registerEvent(data, this.props.history);
   };
 
   render() {
-    const { dateNow } = this.state;
+    const { dateNow, type } = this.state;
     return (
       <div className="form">
         <form onSubmit={this.onSubmit}>
@@ -99,6 +116,43 @@ class CreateEvent extends Component {
             onChange={this.onChange}
             min={dateNow}
           />
+          <label>Type Of Event</label>
+          <div className="form__radio">
+            <input
+              className="radio"
+              type="radio"
+              name="type"
+              value="SINGLE"
+              onChange={this.onChange}
+              required
+            />{" "}
+            <span>Single</span>
+            <input
+              className="radio"
+              type="radio"
+              name="type"
+              value="MULTIPLE"
+              onChange={this.onChange}
+              required
+            />{" "}
+            <span>Team</span>
+          </div>
+          {type === "MULTIPLE" ? (
+            <>
+              <label>Number Of Members In A Team: </label>
+              <input
+                placeholder="Min: 2, Max: 5"
+                name="members"
+                type="number"
+                min={2}
+                max={5}
+                onChange={this.onChange}
+                required
+              />
+            </>
+          ) : (
+            <></>
+          )}
           <label>Deadline </label>
           <input
             type="date"
@@ -124,7 +178,4 @@ class CreateEvent extends Component {
 const mapStateToProps = state => ({
   auth: state.auth
 });
-export default connect(
-  mapStateToProps,
-  { registerEvent }
-)(CreateEvent);
+export default connect(mapStateToProps, { registerEvent })(CreateEvent);

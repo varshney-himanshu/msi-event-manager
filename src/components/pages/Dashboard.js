@@ -120,7 +120,10 @@ class Dashboard extends Component {
                 <>
                   <div className="dashboard-events-body">
                     {events.map(event => (
-                      <div key={event._id} className="dashboard-event">
+                      <div
+                        key={event._id.toString()}
+                        className="dashboard-event"
+                      >
                         <div className="dashboard-event-title">
                           <strong>{event.title}</strong>
                         </div>
@@ -243,7 +246,6 @@ const mapStateToProps = state => ({
   auth: state.auth,
   homeimages: state.data.homeimages
 });
-export default connect(
-  mapStateToProps,
-  { getHomeImages, getAllEvents }
-)(withRouter(Dashboard));
+export default connect(mapStateToProps, { getHomeImages, getAllEvents })(
+  withRouter(Dashboard)
+);
