@@ -163,3 +163,9 @@
 .team-register-show {
   display: block;
 }
+
+@media only screen and (max-width: 600px) {
+  .team-register {
+    width: 95%;
+  }
+}
