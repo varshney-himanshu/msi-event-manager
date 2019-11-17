@@ -34,6 +34,7 @@ import "./components/pages/Form.css";
 import EditProfile from "./components/pages/EditProfile";
 import Users from "./components/pages/Users";
 import About from "./components/pages/About";
+import Contact from "./components/pages/Contact";
 
 store.dispatch(getHomeImages());
 store.dispatch(getAllEvents());
@@ -121,6 +122,7 @@ class App extends Component {
 
               <Route exact path="/notice/add" component={AddNotice} />
               <Route exact path="/about" component={About} />
+              <Route exact path="/contact" component={Contact} />
 
               <Route exact path="/test" component={Test} />
             </Router>
