@@ -17,6 +17,8 @@ class EditProfile extends Component {
       phone: "",
       enrollment_id: "",
       errors: {},
+      semester: "",
+      section: "",
       loading: true
     };
   }
@@ -43,7 +45,9 @@ class EditProfile extends Component {
           institute,
           email,
           phone,
-          course
+          course,
+          semester,
+          section
         } = res.data;
 
         this.setState({
@@ -53,7 +57,9 @@ class EditProfile extends Component {
           institute,
           email,
           phone,
-          course
+          course,
+          semester,
+          section
         });
       }
     });
@@ -66,7 +72,16 @@ class EditProfile extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, auth, institute, phone, course, enrollment_id } = this.state;
+    const {
+      name,
+      auth,
+      institute,
+      phone,
+      course,
+      enrollment_id,
+      semester,
+      section
+    } = this.state;
     const user = auth.user.id;
     const email = auth.user.email;
     const data = {
@@ -76,7 +91,9 @@ class EditProfile extends Component {
       enrollment_id,
       phone,
       course,
-      institute
+      institute,
+      semester,
+      section
     };
 
     Axios.post("https://api-msi-event-manager.now.sh/profile/edit", data)
@@ -149,6 +166,26 @@ class EditProfile extends Component {
               </option>
             </select>
             <br />
+
+            <input
+              type="text"
+              name="semester"
+              value={this.state.semester}
+              placeholder="Semester"
+              onChange={this.onChange}
+              required
+            />
+            <br />
+            <input
+              type="text"
+              name="section"
+              value={this.state.section}
+              placeholder="Section"
+              onChange={this.onChange}
+              required
+            />
+            <br />
+
             <select name="institute" onChange={this.onChange} required>
               <option value="" disabled>
                 Select Institute
@@ -175,7 +212,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { registerProfile }
-)(withRouter(EditProfile));
+export default connect(mapStateToProps, { registerProfile })(
+  withRouter(EditProfile)
+);

@@ -40,7 +40,7 @@ class Profile extends Component {
           axios
             .get("https://api-msi-event-manager.now.sh/profile")
             .then(res => {
-              if (res.data) {
+              if (res) {
                 this.setState({ profile: res.data, loading: false });
                 const profile = res.data;
                 axios
@@ -122,7 +122,11 @@ class Profile extends Component {
                   </div>
                   <div>
                     <span className="field">Course - </span>
-                    <span className="value">{profile.course}</span>
+                    <span className="value">{profile.course} </span>
+                    <span className="field">Semester - </span>
+                    <span className="value">{profile.semester} </span>
+                    <span className="field">Section - </span>
+                    <span className="value">{profile.section} </span>
                   </div>
                   <div>
                     <span className="field">Institute - </span>
@@ -186,7 +190,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(withRouter(Profile));
+export default connect(mapStateToProps, null)(withRouter(Profile));

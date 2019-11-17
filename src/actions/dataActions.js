@@ -31,7 +31,7 @@ export const getAllEvents = () => dispatch => {
 
 export const registerProfile = (data, history) => dispatch => {
   axios
-    .post("https://api-msi-event-manager.now.sh/profile/register", data)
+    .post("http://localhost:5000/profile/register", data)
     .then(res => {
       if (res.data) {
         dispatch(updateIsProfileCreate(true));
