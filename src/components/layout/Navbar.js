@@ -114,6 +114,11 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" to="/about">
+                  About
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="/contact">
                   Contact
                 </Link>
@@ -135,7 +140,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(Navbar);
+export default connect(mapStateToProps, { logoutUser })(Navbar);
