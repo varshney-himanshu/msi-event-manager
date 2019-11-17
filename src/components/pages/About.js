@@ -1,13 +1,16 @@
 import React from "react";
 import pic1 from "../../profile-pic-placeholder.jpg";
 import "./About.css";
+import logo from "../../logo.png";
 
 export default function About() {
   return (
     <section className="container about">
       <div className="about__info">
         <h1 className="heading">ABOUT US</h1>
-        <p>
+
+        <img className="about__logo" src={logo} alt="" />
+        <p className="about__info-paragraph">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem
           porro, dolore ea eaque cumque perspiciatis. Sapiente aliquid hic,
           voluptates neque debitis veniam incidunt esse quae pariatur ipsa

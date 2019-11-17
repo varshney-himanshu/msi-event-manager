@@ -2,12 +2,26 @@
   border-right: none;
 }
 
+.about__logo {
+  width: 12rem;
+  margin: 1rem;
+}
+
+.about__info-paragraph {
+  color: darkslategray;
+  line-height: 100%;
+  padding: 3rem;
+  padding-top: 0;
+}
+
 .team-card {
   background-image: linear-gradient(
     to bottom right,
     rgb(212, 212, 212),
     lightgray
   );
+
+  margin: auto;
   padding: 2rem 1rem;
   border-radius: 5px;
   margin-bottom: 2rem;
@@ -51,7 +65,6 @@
 @media only screen and (max-width: 500px) {
   .team-card {
     width: 20rem;
-    margin: auto;
     margin-bottom: 2rem;
   }
 }

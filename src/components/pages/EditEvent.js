@@ -96,8 +96,6 @@ class EditEvent extends Component {
     data.append("deadline", deadline);
     data.append("image_prev", JSON.stringify(image));
 
-    console.log(image);
-
     Axios.put(
       `https://api-msi-event-manager.now.sh/event/${this.props.match.params.id}`,
       data
@@ -179,7 +177,6 @@ class EditEvent extends Component {
 const mapStateToProps = state => ({
   auth: state.auth
 });
-export default connect(
-  mapStateToProps,
-  { registerEvent }
-)(withRouter(EditEvent));
+export default connect(mapStateToProps, { registerEvent })(
+  withRouter(EditEvent)
+);
