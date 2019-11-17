@@ -25,7 +25,7 @@ export default function About() {
       <div className="about__team">
         <h2 className="heading">MEET OUR TEAM</h2>
         <div className="row">
-          <div className="col col-6 col-md-4 col-lg-3">
+          <div className="col col-12 col-sm-6 col-md-4 col-lg-3">
             <div className="team-card">
               <img className="team-card__pic" src={pic1} alt="" />
               <h4 className="heading team-card__name">Rythm Chaudhary</h4>
@@ -35,7 +35,7 @@ export default function About() {
               <small className="team-card__info">FACULTY | MSI</small>
             </div>
           </div>
-          <div className="col col-6 col-md-4 col-lg-3">
+          <div className="col col-12 col-sm-6 col-md-4 col-lg-3">
             <div className="team-card">
               <img className="team-card__pic" src={pic1} alt="" />
               <h4 className="heading team-card__name">Himanshu Varshney</h4>
@@ -45,7 +45,7 @@ export default function About() {
               <small className="team-card__info">STUDENT - BCA | MSI </small>
             </div>
           </div>
-          <div className="col col-6 col-md-4 col-lg-3">
+          <div className="col col-12 col-sm-6 col-md-4 col-lg-3">
             <div className="team-card">
               <img className="team-card__pic" src={pic1} alt="" />
               <h4 className="heading team-card__name">Amritesh Chandra</h4>
@@ -55,7 +55,7 @@ export default function About() {
               <small className="team-card__info">STUDENT - BCA | MSI</small>
             </div>
           </div>
-          <div className="col col-6 col-md-4 col-lg-3">
+          <div className="col col-12 col-sm-6 col-md-4 col-lg-3">
             <div className="team-card">
               <img className="team-card__pic" src={pic1} alt="" />
               <h4 className="heading team-card__name">Sidharth Gehlot</h4>
