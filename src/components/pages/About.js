@@ -23,6 +23,23 @@ export default function About() {
           possimus. Quis, debitis iure repellat eveniet laboriosam alias
           praesentium.
         </p>
+        <strong className="heading">
+          This project is open source, you can contribute to our repositories.
+        </strong>
+        <div>
+          <a
+            href="https://www.github.com/varshney-himanshu/msi-event-manager"
+            className="repo-link"
+          >
+            Frontend
+          </a>
+          <a
+            href="https://www.github.com/varshney-himanshu/api-msi-event-manager"
+            className="repo-link"
+          >
+            Backend API
+          </a>
+        </div>
       </div>
 
       <div className="about__team">

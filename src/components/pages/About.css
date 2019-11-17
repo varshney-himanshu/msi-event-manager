@@ -3,17 +3,24 @@
 }
 
 .about__logo {
-  width: 12rem;
-  margin: 1rem;
+  width: 10rem;
+  margin: 0.5rem 1rem 0.5rem;
 }
 
 .about__info-paragraph {
   color: darkslategray;
   line-height: 100%;
-  padding: 3rem;
-  padding-top: 0;
+  padding: 0 3rem;
 }
 
+.about__team {
+  margin-top: 1rem;
+}
+
+.about__team .heading {
+  margin-bottom: 1rem;
+  /* border-bottom: 1px solid darkslategray; */
+}
 .team-card {
   background-image: linear-gradient(
     to bottom right,
@@ -85,4 +92,9 @@
   100% {
     transform: rotate(0deg);
   }
+}
+
+.repo-link {
+  padding: 0 1rem;
+  font-weight: 600;
 }

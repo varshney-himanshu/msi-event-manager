@@ -36,7 +36,7 @@ class Navbar extends Component {
       </li>
       <li className="nav-item">
         <Link to="/register" className="nav-link">
-          <button className="button-dark-outline">Register</button>
+          <button className="button-dark">Register</button>
         </Link>
       </li>
     </>
