@@ -11,17 +11,8 @@ export default function About() {
 
         <img className="about__logo" src={logo} alt="" />
         <p className="about__info-paragraph">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-          porro, dolore ea eaque cumque perspiciatis. Sapiente aliquid hic,
-          voluptates neque debitis veniam incidunt esse quae pariatur ipsa
-          temporibus ullam sunt! Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. Et dolore asperiores vitae modi ducimus. Neque quod
-          maxime aliquam laborum, obcaecati alias inventore explicabo adipisci
-          nobis porro quisquam perferendis ducimus ipsum Lorem, ipsum dolor sit
-          amet consectetur adipisicing elit. Minus aspernatur nisi est
-          repellendus culpa, libero iusto, eius iure expedita, eum tenetur
-          possimus. Quis, debitis iure repellat eveniet laboriosam alias
-          praesentium.
+          MSI Events is the Web Application developed and managed by the Software Development Cell, Maharaja Surajmal Institute.
+          The application was built to provide the user an ease when it comes to the event managment. The users can register themselves into any event or even create an event of their own. You can share as much event as you want and then access the database eaisly.
         </p>
         <strong className="heading">
           This project is open source, you can contribute to our repositories.
